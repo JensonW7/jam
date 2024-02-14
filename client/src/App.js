@@ -6,6 +6,8 @@ import Home from "../src/Pages/Home";
 import Profile from "./Pages/Profile";
 import Search from "./Pages/Search";
 
+import Login from "./Components/Login";
+
 function App() {
   return (
     <div className="container">
@@ -30,6 +32,7 @@ function App() {
         <Route path="/search" element={<Search />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
+      <Login />
     </div>
   );
 }
