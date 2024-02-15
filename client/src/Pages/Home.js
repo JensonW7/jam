@@ -2,8 +2,13 @@ import React from 'react'
 // import { Link, Route, Routes } from "react-router-dom";
 // import Profile from "./Profile";
 // import Search from "./Search";
+import { useState } from 'react';
+
+import { Overlay } from "../Components/Overlay/Overlay";
 
 function Home({ code }) {
+const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+
   return (
     <div className="container">
 
@@ -11,7 +16,15 @@ function Home({ code }) {
       <p>Below is your code</p>
       <p>{ code }</p>
 
-      {/* <nav>
+      <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>
+        Example Overlay
+      </button>
+      <Overlay is isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(!isOverlayOpen)}>
+        <h1>Hello from Overlay</h1>
+      </Overlay>
+
+      {
+      /* <nav>
         <ul>
           <Link to="/" class="list">
             Home
