@@ -3,7 +3,7 @@ import "./Overlay.css";
 
 export function Overlay({ isOpen, onClose, children }) {
   return (
-    <Fragment>
+    <>
       {isOpen && (
         <div className="overlay">
           <div className="overlay__background" onClick={onClose} />
@@ -19,7 +19,7 @@ export function Overlay({ isOpen, onClose, children }) {
           </div>
         </div>
       )}
-    </Fragment>
+    </>
   );
 }
 
