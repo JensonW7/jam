@@ -1,26 +1,35 @@
 import React from "react";
-//import { Link, Route, Routes } from "react-router-dom";
-//import Profile from "./Profile";
-//import Search from "./Search";
+import { BrowserRouter as Link, Route, Routes } from "react-router-dom";
+import Profile from "./Profile";
+import Search from "./Search";
 import { useState } from "react";
 
 import { Overlay } from "../Components/Overlay/Overlay";
 
 function Home({ code }) {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(code);
+
+  const logout = () => {
+    window.location.href = "/login"; // Redirect to login page
+    setIsLoggedIn(!code);
+  }
 
   return (
     <div className="container">
-      <h1>You've succesfully logged in with Spotify</h1>
-      <p>Below is your code</p>
-      <p>{code}</p>
-
+      <h1>Welcome to Your Home Page</h1>
+      <button onClick={logout}>Logout</button>
+  
       <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>
         Example Overlay
       </button>
       <Overlay isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(!isOverlayOpen)}>
         <h1>Hello from Overlay</h1>
       </Overlay>
+
+      <p>Below is your code</p>
+      <p>{code}</p>
+
     </div>
 
     /*{
