@@ -2,6 +2,7 @@ import React from "react";
 import { BrowserRouter as Link, Route, Routes } from "react-router-dom";
 import Profile from "./Profile";
 import Search from "./Search";
+import { Grid } from "../Components/Grid"
 import { useState } from "react";
 
 import { Overlay } from "../Components/Overlay/Overlay";
@@ -19,6 +20,7 @@ function Home({ code }) {
     <div className="container">
       <h1>Welcome to Your Home Page</h1>
       <button onClick={logout}>Logout</button>
+      <Grid/>
   
       <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>
         Example Overlay
