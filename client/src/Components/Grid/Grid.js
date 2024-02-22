@@ -13,7 +13,7 @@ export function Grid(){
       <center>
         <div class="grid">
         
-        {profiles.map(item => (<Box image={item.album_cover} name={item.name}> </Box>))}
+        {profiles.map(item => (<Box image={item.album_cover} name={item.name} > </Box>))}
       </div>
       </center>
       );

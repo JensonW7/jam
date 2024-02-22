@@ -2,13 +2,10 @@ import React from "react";
 import { BrowserRouter as Link, Route, Routes } from "react-router-dom";
 import Profile from "./Profile";
 import Search from "./Search";
-import { Grid } from "../Components/Grid"
+import { Grid } from "../Components/Grid/Grid"
 import { useState } from "react";
 
-import { Overlay } from "../Components/Overlay/Overlay";
-
 function Home({ code }) {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(code);
 
   const logout = () => {
@@ -21,13 +18,6 @@ function Home({ code }) {
       <h1>Welcome to Your Home Page</h1>
       <button onClick={logout}>Logout</button>
       <Grid/>
-  
-      <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>
-        Example Overlay
-      </button>
-      <Overlay isOpen={isOverlayOpen} onClose={() => setIsOverlayOpen(!isOverlayOpen)}>
-        <h1>Hello from Overlay</h1>
-      </Overlay>
 
       <p>Below is your code</p>
       <p>{code}</p>
