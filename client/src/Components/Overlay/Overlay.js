@@ -1,6 +1,12 @@
 import "./Overlay.css";
 
-export function Overlay({ isOpen, onClose, children, overlayImage, overlayText }) {
+export function Overlay({
+  isOpen,
+  onClose,
+  children,
+  overlayImage,
+  overlayText,
+}) {
   return (
     <>
       {isOpen && (
@@ -15,14 +21,18 @@ export function Overlay({ isOpen, onClose, children, overlayImage, overlayText }
               />
             </div>
             {children}
-            <div className="overlayImage">
-              <img
-                src={overlayImage}
-                alt="overlay album cover"
-                width="200"
-                height="200"
-              ></img>
-              <p>{overlayText}</p>
+            <div className="overlay_content">
+              <div className="overlay_image">
+                <img
+                  src={overlayImage}
+                  alt="overlay album cover"
+                  width={200}
+                  height={200}
+                ></img>
+              </div>
+              <div className="overlay_text">
+                <p>{overlayText}</p>
+              </div>
             </div>
           </div>
         </div>
