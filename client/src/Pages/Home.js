@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Link, Route, Routes } from "react-router-dom";
 import Profile from "./Profile";
 import Search from "./Search";
-import { Grid } from "../Components/Grid"
+import { Grid } from "../Components/Grid/Grid"
 import { useState } from "react";
 
 import { Overlay } from "../Components/Overlay/Overlay";
