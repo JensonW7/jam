@@ -1,3 +1,4 @@
+/*
 import React from "react"
 
 const AUTH_URL =
@@ -8,3 +9,18 @@ export default function Login() {
     <button><a href={AUTH_URL}>Login With Spotify</a></button>
   )
 }
+*/
+
+const Login = () => {
+  const handleLogin = () => {
+    window.location.href = 'http://localhost:3000/login'; // Redirect to Express server for Spotify login
+  };
+
+  return (
+    <div>
+      <button onClick={handleLogin}>Log in with Spotify</button>
+    </div>
+  );
+};
+
+export default Login;
