@@ -28,3 +28,8 @@ span {
 .song-info {
   background-color: aquamarine;
 }
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+}
