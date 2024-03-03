@@ -1,6 +1,8 @@
+require('dotenv').config()
 const express = require('express');
 const axios = require('axios');
 const querystring = require('querystring');
+const mongoose = require('mongoose')
 
 const app = express();
 
@@ -96,11 +98,17 @@ app.get('/callback', async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve data from Spotify', details: error.message });
   }
-
-  
-  
 });
 
-app.listen(3000, () => {
-  console.log("Server running on port 3000");
-});
+// connect to database
+mongoose.connect(process.env.MONGO_URI)
+    .then(() => {
+        app.listen(process.env.PORT, () => {
+            console.log("Server running on port", process.env.PORT);
+          });
+          
+    })
+    .catch((error) => {
+        console.log(error)
+    })
+
