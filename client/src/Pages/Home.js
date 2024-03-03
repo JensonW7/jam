@@ -2,14 +2,9 @@ import React from "react";
 import { BrowserRouter as Link, Route, Routes } from "react-router-dom";
 import Profile from "./Profile";
 import Search from "./Search";
-<<<<<<< HEAD
 import { Grid } from "../Components/Grid/Grid";
-=======
-import { Grid } from "../Components/Grid/Grid"
->>>>>>> ed913dfa4f70b078f25648807936130dd09e0f1c
 import { useState } from "react";
 import Navbar from "../Components/Navbar"
-
 import { Overlay } from "../Components/Overlay/Overlay";
 
 function Home({ code }) {
