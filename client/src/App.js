@@ -1,13 +1,28 @@
-import "./App.css";
-import React from "react";
+// set up
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import Home from "./Pages/Home";
-import Login from "./Pages/Login";
+// pages
+import Home from "./pages/Home";
 
-  const code = new URLSearchParams(window.location.search).get("code");
+// components
+import Navbar from "./components/Navbar"
 
 function App() {
-  return code ? <Home code={code} /> : <Login />;
+  return (
+    <div className="App">
+      <BrowserRouter>
+          <Navbar />
+          <div className="pages">
+            <Routes>
+              <Route 
+                path='/'
+                element={ <Home /> }
+              />
+            </Routes>
+          </div>
+      </BrowserRouter>
+    </div>
+  )
 }
 
 export default App;
