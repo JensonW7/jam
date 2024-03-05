@@ -4,7 +4,7 @@ import Profile from "./Profile";
 import Search from "./Search";
 import { Grid } from "../Components/Grid/Grid"
 import { useState } from "react";
-
+import Navbar from "../Components/Navbar"
 import { Overlay } from "../Components/Overlay/Overlay";
 
 function Home({ code }) {
@@ -20,6 +20,7 @@ function Home({ code }) {
     <div className="container">
       <h1>Welcome to Your Home Page</h1>
       <button onClick={logout}>Logout</button>
+      <Navbar/>
       <Grid/>
   
       <button onClick={() => setIsOverlayOpen(!isOverlayOpen)}>
@@ -31,7 +32,7 @@ function Home({ code }) {
 
       <p>Below is your code</p>
       <p>{code}</p>
-
+      <Profile /> 
     </div>
 
     /*{
