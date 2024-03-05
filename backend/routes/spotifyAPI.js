@@ -10,6 +10,15 @@ const client_id = process.env.CLIENT_ID
 const client_secret = process.env.CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI
 
+// middleware
+const session = require('express-session');
+
+router.use(session({
+  secret: client_secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
 
 // random string generator
 function generateRandomString(length) {
@@ -62,33 +71,41 @@ router.get('/callback', async (req, res) => {
     });
 
     const accessToken = response.data.access_token;
+    req.session.accessToken = accessToken;
     console.log(accessToken)
 
   // Redirect to a page or display a message indicating successful authentication
-    res.send('Authentication successful! You can now access the Spotify data endpoints.');
     } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve access token from Spotify', details: error.message });
   }
+// fetching user profile data
+  try {
+    const userProfileResponse = await axios.get('https://api.spotify.com/v1/me', {
+      headers: {
+        'Authorization': `Bearer ${req.session.accessToken}`
+      }
+    });
+    req.session.userId = userProfileResponse.data.id;
+  } catch (error) {
+    return res.status(500).json({ error: 'Failed to retrieve user profile from Spotify', details: error.message });
+  }
+  res.send('Authentication successful! You can now access the Spotify data endpoints.');
 });
 
-// middleware
-const accessTokenMiddleware = (req, res, next) => {
-  const authHeader = req.headers['authorization'];
-  const accessToken = authHeader && authHeader.split(' ')[1];
-
-  if (!accessToken) {
-    return res.status(401).json({ error: 'Unauthorized: No access token provided' });
+// testing if middleware works
+/*
+router.get('/test-session', (req, res) => {
+  if (!req.session.testCount) {
+    req.session.testCount = 0;
   }
-
-  req.accessToken = accessToken;
-  next();
-};
-
+  req.session.testCount += 1;
+  res.send(`Session test count: ${req.session.testCount}`);
+});
+*/
 
 const currentSongCollection = require('../models/currentSongCollection');
-router.get('/currently-playing', accessTokenMiddleware, async (req, res) => {
-  const accessToken = req.accessToken;
-  console.log(accessToken)
+router.get('/currently-playing', async (req, res) => {
+  const accessToken = req.session.accessToken;
   if (!accessToken) {
     return res.status(401).json({ error: 'Unauthorized: No access token available' });
   }
@@ -104,10 +121,13 @@ router.get('/currently-playing', accessTokenMiddleware, async (req, res) => {
       return res.status(204).json({ message: 'No content currently playing' });
     }
 
+    console.log(currentlyPlayingResponse.data.item)
+
     const currentSongData = currentlyPlayingResponse.data.item;
     const durationMs = currentlyPlayingResponse.data.item.duration_ms;
     const duration = convertMsToMinutesAndSeconds(durationMs);
-    const userId = req.user._id; // idk if this is right
+    
+    const userId = req.session.userId; 
 
     // retrieving user song collection from database
     let userSongCollection = await currentSongCollection.findOne({ user: userId });
@@ -127,9 +147,9 @@ router.get('/currently-playing', accessTokenMiddleware, async (req, res) => {
       artist: currentSongData.artists.map(artist => artist.name).join(', '),
       album: currentSongData.album.name,
       image: {  // Make sure this matches the structure defined in your song schema
-        url: currentSongData.album.images.url,
-        height: currentSongData.album.images.height,
-        width: currentSongData.album.images.width,
+        url: currentSongData.album.images[0].url,
+        height: currentSongData.album.images[0].height,
+        width: currentSongData.album.images[0].width,
       },
       duration: duration
     }
