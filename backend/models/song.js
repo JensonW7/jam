@@ -22,7 +22,7 @@ const songSchema = new Schema ({
         required: true
     },
     duration: {
-        type: duration, 
+        type: String, 
         required: true
     }
 

@@ -71,9 +71,24 @@ router.get('/callback', async (req, res) => {
   }
 });
 
-const currentSongCollection = require('../models/currentSongCollection');
+// middleware
+const accessTokenMiddleware = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const accessToken = authHeader && authHeader.split(' ')[1];
 
-router.get('/currently-playing', async (req, res) => {
+  if (!accessToken) {
+    return res.status(401).json({ error: 'Unauthorized: No access token provided' });
+  }
+
+  req.accessToken = accessToken;
+  next();
+};
+
+
+const currentSongCollection = require('../models/currentSongCollection');
+router.get('/currently-playing', accessTokenMiddleware, async (req, res) => {
+  const accessToken = req.accessToken;
+  console.log(accessToken)
   if (!accessToken) {
     return res.status(401).json({ error: 'Unauthorized: No access token available' });
   }
@@ -92,7 +107,7 @@ router.get('/currently-playing', async (req, res) => {
     const currentSongData = currentlyPlayingResponse.data.item;
     const durationMs = currentlyPlayingResponse.data.item.duration_ms;
     const duration = convertMsToMinutesAndSeconds(durationMs);
-    const userId = req.user.__id; // idk if this is right
+    const userId = req.user._id; // idk if this is right
 
     // retrieving user song collection from database
     let userSongCollection = await currentSongCollection.findOne({ user: userId });
