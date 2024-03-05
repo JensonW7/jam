@@ -2,15 +2,15 @@ const mongoose = require('mongoose')
 
 const Schema = mongoose.Schema
 
-const songSchema = require('./song');
+const song = require('./song')
 
-//defines structure of doc
+//defines structure
 const currentSongCollectionSchema = new Schema({
     user: {
         type: String,
         required: true
     },
-    songs: [songSchema]
+    songs: [song]
 })
 
 module.exports = mongoose.model('currentSongCollection', currentSongCollectionSchema)
