@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import '../index.css'
 
 // components
-import SongCollection from '../components/SongCollection'
+import SongCollection from './components/SongCollection'
 
 const Home = () => {
     const [songCollections, setSongCollections] = useState(null)
