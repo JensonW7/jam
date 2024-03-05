@@ -71,6 +71,8 @@ router.get('/callback', async (req, res) => {
   }
 });
 
+const currentSongCollection = require('../models/currentSongCollection');
+
 router.get('/currently-playing', async (req, res) => {
   if (!accessToken) {
     return res.status(401).json({ error: 'Unauthorized: No access token available' });
@@ -83,11 +85,43 @@ router.get('/currently-playing', async (req, res) => {
       } 
     });
 
-    if (currentlyPlayingResponse.data) {
-      res.json(currentlyPlayingResponse.data);
-    } else {
-      res.status(204).json({ message: 'No content currently playing' });
+    if (!currentlyPlayingResponse.data || !currentlyPlayingResponse.data.item) {
+      return res.status(204).json({ message: 'No content currently playing' });
     }
+
+    const currentSongData = currentlyPlayingResponse.data.item;
+    const durationMs = currentlyPlayingResponse.data.item.duration_ms;
+    const duration = convertMsToMinutesAndSeconds(durationMs);
+    const userId = req.user.__id; // idk if this is right
+
+    // retrieving user song collection from database
+    let userSongCollection = await currentSongCollection.findOne({ user: userId });
+    
+    // or creating new one 
+    if (!userSongCollection) {
+      userSongCollection = new currentSongCollection({ user: userId, songs: [] });
+    }
+
+    // if there are more than 5, update 
+    if (userSongCollection.songs.length >= 5) {
+      userSongCollection.songs.shift(); 
+    }
+
+    const songToAdd = {
+      title: currentSongData.name,
+      artist: currentSongData.artists.map(artist => artist.name).join(', '),
+      album: currentSongData.album.name,
+      image: {  // Make sure this matches the structure defined in your song schema
+        url: currentSongData.album.images.url,
+        height: currentSongData.album.images.height,
+        width: currentSongData.album.images.width,
+      },
+      duration: duration
+    }
+
+    userSongCollection.songs.push(songToAdd);
+    await userSongCollection.save();
+    res.json(userSongCollection);
 
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
@@ -96,3 +130,10 @@ router.get('/currently-playing', async (req, res) => {
 
 
 module.exports = router
+
+// helper function for duration_ms
+function convertMsToMinutesAndSeconds(milliseconds) {
+  const minutes = Math.floor(milliseconds / 60000);
+  const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
+  return minutes + ":" + (seconds < 10 ? '0' : '') + seconds; 
+}
