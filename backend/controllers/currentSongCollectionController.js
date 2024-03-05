@@ -12,13 +12,9 @@ const getCurrentSongCollections = async (req, res) => {
 
 // get a single current song
 const getCurrentSongCollection = async (req, res) => {
-    const { id } = req.params
+    const { userId } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "song doesn't exist"})
-    }
-
-    const current_song = await currentSongCollection.findById(id)
+    const current_song = await currentSongCollection.findOne({ user: userId });
 
     if (!current_song) {
         return res.status(404).json({error: "song doesn't exist"})
@@ -41,14 +37,9 @@ const createCurrentSongCollection = async (req, res) => {
 
 // delete a current song
 const deleteCurrentSongCollection = async (req, res) => {
-    const { id } = req.params
+    const { userId } = req.params
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "song doesn't exist"})
-    }
-    
-    const current_song = await currentSongCollection.findOneAndDelete({_id: id})
-
+    const current_song = await currentSongCollection.findOneAndDelete({ user: userId });
     if (!current_song) {
         return res.status(404).json({error: "song doesn't exist"})
     }
@@ -58,13 +49,9 @@ const deleteCurrentSongCollection = async (req, res) => {
 
 // update a current song
 const updateCurrentSongCollection = async (req, res) => {
-    const { id } = req.params
-
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({error: "song doesn't exist"})
-    }
+    const { userId } = req.params
     
-    const current_song = await currentSongCollection.findOneAndUpdate({_id: id}, {
+    const current_song = await currentSongCollection.findOneAndUpdate({ user: userId }, {
         ...req.body
     })
 
