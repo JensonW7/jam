@@ -64,19 +64,35 @@ router.get('/callback', async (req, res) => {
     const accessToken = response.data.access_token;
     console.log(accessToken)
 
-    // Use the access token to access the Spotify Web API
+  // Redirect to a page or display a message indicating successful authentication
+    res.send('Authentication successful! You can now access the Spotify data endpoints.');
+    } catch (error) {
+    res.status(500).json({ error: 'Failed to retrieve access token from Spotify', details: error.message });
+  }
+});
+
+router.get('/currently-playing', async (req, res) => {
+  if (!accessToken) {
+    return res.status(401).json({ error: 'Unauthorized: No access token available' });
+  }
+
+  try {
     const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
       headers: {
         'Authorization': `Bearer ${accessToken}`
-      }
+      } 
     });
 
-    // Display the currently playing track as JSON
-    // res.status(200).redirect('http://localhost:3000/').json(currentlyPlayingResponse.data);
-    res.status(200).json(currentlyPlayingResponse.data)
+    if (currentlyPlayingResponse.data) {
+      res.json(currentlyPlayingResponse.data);
+    } else {
+      res.status(204).json({ message: 'No content currently playing' });
+    }
+
   } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve data from Spotify', details: error.message });
+    res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
   }
 });
+
 
 module.exports = router
