@@ -16,10 +16,9 @@ const songSchema = new Schema ({
         required: true
     },
     image: {
-        url: String,
-        height: Number,
-        width: Number,
-        required: true
+        url: { type: String, required: true },
+        height: { type: Number, required: true },
+        width: { type: Number, required: true }
     },
     duration: {
         type: String, 
@@ -28,4 +27,4 @@ const songSchema = new Schema ({
 
 });
 
-module.exports = mongoose.model('song', songSchema)
+module.exports = songSchema;
