@@ -6,13 +6,17 @@ import '../index.css'
 import SongCollection from '../components/SongCollection'
 import useAuth from '../hooks/useAuth'
 
-const Home = ({ code, state }) => {
-    const [songCollections, setSongCollections] = useState(null)
-    const res = useAuth(code, state)
-    console.log(res)
+//context
+import { useUserContext } from '../hooks/useUserContext'
 
-    // const accessToken = useAuth(code, state)
-    // console.log(res)
+const Home = ({ code, state }) => {
+    const {username, accessToken, dispatch} = useUserContext()
+    
+    const [songCollections, setSongCollections] = useState(null)
+    useAuth(code, state)
+
+    console.log('username from home:', username)
+    console.log('access token from home:', accessToken)
 
     useEffect(() => {
         const fetchCurrentSongCollections = async() => {

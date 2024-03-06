@@ -14,7 +14,6 @@ const getUsers = async (req, res) => {
 const getUser = async (req, res) => {
     const { id } = req.params
     const user = await userCollection.find({'username': id})
-    console.log('user:', user)
 
     if (user.length == 0) {
         return res.status(404).json({error: "user doesn't exist"})

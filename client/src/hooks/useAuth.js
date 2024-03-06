@@ -1,13 +1,9 @@
 import React from "react"
 import { useState, useEffect } from 'react'
-import { userContext } from "../contexts/userContext"
+import { useUserContext } from "./useUserContext"
 
 export default function useAuth(code, state) {
-    const userContext = useContext(userContext)
-    
-    const [accessToken, setAccessToken] = useState(null)
-    const [userName, setUserName] = useState(null)
-    const [userID, setUserID] = useState(null)
+    const {username, accessToken, dispatch} = useUserContext()
 
     useEffect(() => {
         const fetchAccessToken = async() => {
@@ -24,7 +20,12 @@ export default function useAuth(code, state) {
             const json = await response.json()
 
             if (response.ok) {
-                setAccessToken(json.access_token)
+                console.log('response token:', json.access_token)
+                dispatch({
+                    type: 'SET_ACCESSTOKEN',
+                    payload: json.access_token
+                })
+                // setAccessToken(json.access_token)
             }
         }
 
@@ -41,7 +42,10 @@ export default function useAuth(code, state) {
             const json = await response.json()
 
             if (response.ok) {
-                setUserID(json.id)
+                dispatch({
+                    type: 'SET_USERNAME',
+                    payload: json.id
+                })
             }
         }
 
@@ -50,16 +54,15 @@ export default function useAuth(code, state) {
 
     useEffect(() => {
         const findUser = async() => {
-            const userURL = '/users/' + userID
+            const userURL = '/users/' + username
             const response = await fetch(userURL)
             const json = await response.json()
             
             if (response.ok) {
             } else {
-                console.log('called')
                 const makeUserProfile = async() => {
                     const { profile } = {
-                        username: userID,
+                        username: username,
                         friends: []
                     }
 
@@ -69,7 +72,7 @@ export default function useAuth(code, state) {
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
-                            username: userID,
+                            username: username,
                             friends: []
                         })
                     })
@@ -80,7 +83,5 @@ export default function useAuth(code, state) {
         }
 
         findUser()
-    }, [userID])
-
-    return JSON.stringify({accessToken, userName, userID})
+    }, [username])
 }
