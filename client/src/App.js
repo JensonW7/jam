@@ -2,10 +2,11 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./pages/Home";
+import Home from "./Pages/Home";
+import SearchProfile from "./Pages/SearchProfile";
 
 // components
-import Navbar from "./components/Navbar"
+import Navbar from "./Components/Navbar"
 
 function App() {
   return (
@@ -17,6 +18,10 @@ function App() {
               <Route 
                 path='/'
                 element={ <Home /> }
+              />
+              <Route 
+                path='/SearchProfile'
+                element={ <SearchProfile /> }
               />
             </Routes>
           </div>
