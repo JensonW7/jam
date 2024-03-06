@@ -36,8 +36,6 @@ router.get('/login', function (req, res) {
 })
 
 router.post('/access_token', async(req, res) => {
-  console.log('access token called')
-
   const code = req.body.code
   const state = req.body.state
 
@@ -62,7 +60,6 @@ router.post('/access_token', async(req, res) => {
     });
   
   const accessToken = response.data.access_token;
-  console.log('sending access token')
   res.status(200).json(response.data)
   } catch(error) {
     res.status(400).json(error)
@@ -71,7 +68,6 @@ router.post('/access_token', async(req, res) => {
 
 // get access token and currently playing song
 router.get('/callback', async (req, res) => {
-  console.log('called callback on server')
   const code = req.query.code || null;
   const state = req.query.state || null;
   
@@ -95,8 +91,6 @@ router.get('/callback', async (req, res) => {
       }
     });
 
-    console.log(response)
-
     const accessToken = response.data.access_token;
 
     // Use the access token to access the Spotify Web API
@@ -109,7 +103,6 @@ router.get('/callback', async (req, res) => {
     // Display the currently playing track as JSON
     // res.status(200).redirect('http://localhost:3000/').json(currentlyPlayingResponse.data);
     // res.status(200).json(currentlyPlayingResponse.data)
-    console.log('sending access token')
     res.status(200).json(accessToken)
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve data from Spotify', details: error.message });
