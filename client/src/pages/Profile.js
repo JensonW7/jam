@@ -2,9 +2,11 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 // const session = require('express-session')
 
-let YOUR_ACCESS_TOKEN = "1234";
+import { useUserContext } from '../hooks/useUserContext'
 
 const Profile = () => {
+    const {username, accessToken, dispatch} = useUserContext()
+
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -16,12 +18,12 @@ const Profile = () => {
                 const [topArtistsResponse, topTracksResponse, topGenresResponse] = await Promise.all([
                     axios.get('https://api.spotify.com/v1/me/top/artists', {
                         headers: {
-                            'Authorization': `Bearer ${YOUR_ACCESS_TOKEN}`
+                            'Authorization': `Bearer ${accessToken}`
                         }
                     }),
                     axios.get('https://api.spotify.com/v1/me/top/tracks', {
                         headers: {
-                            'Authorization': `Bearer ${YOUR_ACCESS_TOKEN}`
+                            'Authorization': `Bearer ${accessToken}`
                         }
                     }),
                 ]);

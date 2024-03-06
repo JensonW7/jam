@@ -2,8 +2,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./pages/Home";
+import Home from "./pages/Home"
 import Login from "./pages/Login"
+import Profile from "./pages/Profile"
 
 // components
 import Navbar from "./components/Navbar"
@@ -21,12 +22,16 @@ function App() {
               <Routes>
                 {code && <Route
                   path='/'
-                  element={ <Home code={code} state={state}/>}
+                  element={ <Home code={code} state={state}/> }
                 />}
                 {!code && <Route 
                   path='/'
-                  element={ <Login />}
+                  element={ <Login /> }
                 />}
+                <Route 
+                  path='/profile'
+                  element={ <Profile /> }
+                />
               </Routes>
             </div>
       </BrowserRouter>
