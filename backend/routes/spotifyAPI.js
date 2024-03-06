@@ -101,7 +101,6 @@ router.get('/callback', async (req, res) => {
     });
 
     const accessToken = response.data.access_token;
-<<<<<<< HEAD
     req.session.accessToken = accessToken;
     console.log(accessToken)
 
@@ -158,7 +157,6 @@ router.get('/currently-playing', async (req, res) => {
     const durationMs = currentlyPlayingResponse.data.item.duration_ms;
     const timestamp = currentlyPlayingResponse.data.timestamp;
     const duration = convertMsToMinutesAndSeconds(durationMs);
-    
     const userId = req.session.userId; 
 
     // retrieving user song collection from database
@@ -191,20 +189,6 @@ router.get('/currently-playing', async (req, res) => {
     await userSongCollection.save();
     res.json(userSongCollection);
 
-=======
-
-    // Use the access token to access the Spotify Web API
-    // const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
-    //   headers: {
-    //     'Authorization': `Bearer ${accessToken}`
-    //   }
-    // });
-
-    // Display the currently playing track as JSON
-    // res.status(200).redirect('http://localhost:3000/').json(currentlyPlayingResponse.data);
-    // res.status(200).json(currentlyPlayingResponse.data)
-    res.status(200).json(accessToken)
->>>>>>> 97df923f4684cd3e8e102850e166b2f684d4ea20
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
   }
