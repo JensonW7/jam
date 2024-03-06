@@ -3,6 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import Home from "./pages/Home";
+import Profile from "./pages/Profile";
 
 // components
 import Navbar from "./components/Navbar"
@@ -17,6 +18,10 @@ function App() {
               <Route 
                 path='/'
                 element={ <Home /> }
+              />
+              <Route
+                path='/profile'
+                element={ <Profile /> }
               />
             </Routes>
           </div>
