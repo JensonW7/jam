@@ -16,9 +16,9 @@ const songSchema = new Schema ({
         required: true
     },
     image: {
-        url: { type: String, required: true },
-        height: { type: Number, required: true },
-        width: { type: Number, required: true }
+        url: { type: String },
+        height: { type: Number },
+        width: { type: Number }
     },
     duration: {
         type: String, 
