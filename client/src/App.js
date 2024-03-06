@@ -2,10 +2,10 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./pages/Home";
+import Home from "./Pages/Home.js";
 
 // components
-import Navbar from "./components/Navbar"
+import Navbar from "./Components/Navbar.js"
 
 function App() {
   return (

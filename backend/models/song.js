@@ -23,6 +23,9 @@ const songSchema = new Schema ({
     duration: {
         type: String, 
         required: true
+    },
+    timestamp: {
+        type: Number
     }
 
 });

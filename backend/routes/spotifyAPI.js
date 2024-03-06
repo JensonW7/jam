@@ -125,6 +125,7 @@ router.get('/currently-playing', async (req, res) => {
 
     const currentSongData = currentlyPlayingResponse.data.item;
     const durationMs = currentlyPlayingResponse.data.item.duration_ms;
+    const timestamp = currentlyPlayingResponse.data.timestamp;
     const duration = convertMsToMinutesAndSeconds(durationMs);
     
     const userId = req.session.userId; 
@@ -151,9 +152,10 @@ router.get('/currently-playing', async (req, res) => {
         height: currentSongData.album.images[0].height,
         width: currentSongData.album.images[0].width,
       },
-      duration: duration
+      duration: duration,
+      timestamp: timestamp
     }
-
+    
     userSongCollection.songs.push(songToAdd);
     await userSongCollection.save();
     res.json(userSongCollection);
@@ -163,6 +165,10 @@ router.get('/currently-playing', async (req, res) => {
   }
 });
 
+router.get('/currently-playing', async (req, res) => {
+  const accessToken = req.session.accessToken;
+
+})
 
 module.exports = router
 
