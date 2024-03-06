@@ -1,12 +1,18 @@
 // setup
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import '../index.css'
 
 // components
-import SongCollection from './components/SongCollection'
+import SongCollection from '../components/SongCollection'
+import useAuth from '../hooks/useAuth'
 
-const Home = () => {
+const Home = ({ code, state }) => {
     const [songCollections, setSongCollections] = useState(null)
+    const res = useAuth(code, state)
+    console.log(res)
+
+    // const accessToken = useAuth(code, state)
+    // console.log(res)
 
     useEffect(() => {
         const fetchCurrentSongCollections = async() => {
