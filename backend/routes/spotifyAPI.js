@@ -2,7 +2,6 @@
 const express = require('express')
 const router = express.Router()
 
-
 // setup
 const axios = require('axios')
 const querystring = require('querystring')
@@ -32,24 +31,55 @@ function generateRandomString(length) {
 
 // login
 router.get('/login', function (req, res) {
-    const state = generateRandomString(16)
-    const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private app-remote-control streaming user-library-modify user-library-read user-top-read user-read-playback-position user-read-recently-played user-follow-read user-follow-modify'
-    
-    res.redirect('https://accounts.spotify.com/authorize?' +
-    querystring.stringify({
-      response_type: 'code',
-      client_id: client_id,
-      scope: scope,
+  const state = generateRandomString(16)
+  const scope = 'user-read-private user-read-email user-read-playback-state user-modify-playback-state user-read-currently-playing playlist-read-private playlist-read-collaborative playlist-modify-public playlist-modify-private app-remote-control streaming user-library-modify user-library-read user-top-read user-read-playback-position user-read-recently-played user-follow-read user-follow-modify'
+  
+  res.redirect('https://accounts.spotify.com/authorize?' +
+  querystring.stringify({
+    response_type: 'code',
+    client_id: client_id,
+    scope: scope,
+    redirect_uri: redirect_uri,
+    state: state
+  }))
+})
+
+router.post('/access_token', async(req, res) => {
+  const code = req.body.code
+  const state = req.body.state
+
+  if (state === null) {
+    return res.redirect('/#' +
+      querystring.stringify({
+        error: 'state_mismatch'
+      }))
+  }
+
+  const authString = Buffer.from(`${client_id}:${client_secret}`).toString('base64');
+  try {
+    const response = await axios.post('https://accounts.spotify.com/api/token', querystring.stringify({
+      code: code,
       redirect_uri: redirect_uri,
-      state: state
-    }))
+      grant_type: 'authorization_code'
+    }), {
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization': `Basic ${authString}`
+      }
+    });
+  
+  const accessToken = response.data.access_token;
+  res.status(200).json(response.data)
+  } catch(error) {
+    res.status(400).json(error)
+  }
 })
 
 // get access token and currently playing song
 router.get('/callback', async (req, res) => {
   const code = req.query.code || null;
   const state = req.query.state || null;
-
+  
   if (state === null) {
     return res.redirect('/#' +
       querystring.stringify({
@@ -71,6 +101,7 @@ router.get('/callback', async (req, res) => {
     });
 
     const accessToken = response.data.access_token;
+<<<<<<< HEAD
     req.session.accessToken = accessToken;
     console.log(accessToken)
 
@@ -160,6 +191,20 @@ router.get('/currently-playing', async (req, res) => {
     await userSongCollection.save();
     res.json(userSongCollection);
 
+=======
+
+    // Use the access token to access the Spotify Web API
+    // const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
+    //   headers: {
+    //     'Authorization': `Bearer ${accessToken}`
+    //   }
+    // });
+
+    // Display the currently playing track as JSON
+    // res.status(200).redirect('http://localhost:3000/').json(currentlyPlayingResponse.data);
+    // res.status(200).json(currentlyPlayingResponse.data)
+    res.status(200).json(accessToken)
+>>>>>>> 97df923f4684cd3e8e102850e166b2f684d4ea20
   } catch (error) {
     res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
   }

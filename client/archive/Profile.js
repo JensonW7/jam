@@ -1,9 +1,19 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react';
+/*import 'bootstrap/dist/css/bootstrap.min.css';
+import { Container, InputGroup, FormControl, Button, Col, Card } from 'react-bootstrap';
+*/
+const Profile = () => {
+  const [data, setData] = useState(null);
 
-function Profile() {
-  return (
-    <div>Profile</div>
-  )
-}
+  useEffect(() => {
+    fetch("http://localhost:3000/login")
+      .then(res => {
+        return res.json()
+      }) 
+      .then((data) => {
+        console.log(data)
+      })
+  }, []);
+};
 
-export default Profile
+export default Profile;
