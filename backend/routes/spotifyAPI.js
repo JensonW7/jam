@@ -147,7 +147,18 @@ router.post('/update-database', async (req, res) => {
     console.log(userSongCollection)
     // or creating new one 
     if (!userSongCollection) {
-      userSongCollection = new currentSongCollection({ user: username, songs: [] });
+      const makeNewSongCollection = async () => {
+        const repsonse = await fetch('/api/current_songs', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: {
+            user: username,
+            songs: [songToAdd]
+          }
+        })
+      }
     }
 
     // if there are more than 5, update 

@@ -18,7 +18,6 @@ export default function useAuth(code, state) {
                 })
             })
             const json = await response.json()
-            console.log('access token', json.access_token)
 
             if (response.ok) {
                 console.log('response token:', json.access_token)
@@ -82,7 +81,6 @@ export default function useAuth(code, state) {
                 makeUserProfile()
             }
         }
-
         findUser()
     }, [username])
 }
