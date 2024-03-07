@@ -6,10 +6,6 @@ const Navbar = () => {
             <div className="navbar">
                 <Link to="/"><h1>Jam</h1></Link>
                 <Link to="/profile">Profile</Link>
-<<<<<<< HEAD
-=======
-                <Link to="/search">Find Friends</Link>
->>>>>>> main
                 <Link to="http://localhost:4000/spotify/login">get currently playing song</Link>
             </div>
         </header>
