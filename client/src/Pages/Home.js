@@ -4,7 +4,9 @@ import '../index.css'
 
 // components
 import SongCollection from '../Components/SongCollection'
+import FriendBox from '../Components/FriendBox'
 import useAuth from '../hooks/useAuth'
+
 //context
 import { useUserContext } from '../hooks/useUserContext'
 
@@ -34,7 +36,7 @@ const Home = ({ code, state }) => {
         <div className="home">
             <div className="songCollections">
                 {songCollections && songCollections.map((collection) => (
-                    <SongCollection key={collection._id} collection={collection}/>
+                    <FriendBox key={collection._id} collection={collection}/>
                 ))}
             </div>
         </div>
