@@ -2,29 +2,43 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./Pages/Home";
-import SearchProfile from "./Pages/SearchProfile";
+import Home from "./pages/Home.js"
+import Login from "./pages/Login"
+import Profile from "./pages/Profile"
+import SearchProfile from './pages/SearchProfile.js'
 
 // components
-import Navbar from "./Components/Navbar"
+import Navbar from "./components/Navbar.js"
+
+// auth
+const code = new URLSearchParams(window.location.search).get('code')
+const state = new URLSearchParams(window.location.search).get('state')
 
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-          <Navbar />
-          <div className="pages">
-            <Routes>
-              <Route 
-                path='/'
-                element={ <Home /> }
-              />
-              <Route 
+            <Navbar />
+            <div className="pages">
+              <Routes>
+                {code && <Route
+                  path='/'
+                  element={ <Home code={code} state={state}/> }
+                />}
+                {!code && <Route 
+                  path='/'
+                  element={ <Login /> }
+                />}
+                <Route 
+                  path='/profile'
+                  element={ <Profile /> }
+                />
+                <Route 
                 path='/SearchProfile'
                 element={ <SearchProfile /> }
-              />
-            </Routes>
-          </div>
+                />
+              </Routes>
+            </div>
       </BrowserRouter>
     </div>
   )

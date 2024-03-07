@@ -1,17 +1,25 @@
 // setup
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-
 import '../index.css'
 
 // components
-import SongCollection from '../Components/SongCollection'
-import SearchForm from '../Components/SearchForm'
+import SongCollection from '../components/SongCollection'
+import SearchForm from '../components/SearchForm'
+import useAuth from '../hooks/useAuth'
 
-const Home = () => {
-    const navigate = useNavigate();
+//context
+import { useUserContext } from '../hooks/useUserContext'
 
+const Home = ({ code, state }) => {
+    const navigate = useNavigate()
+    const {username, accessToken, dispatch} = useUserContext()
+    
     const [songCollections, setSongCollections] = useState(null)
+    useAuth(code, state)
+
+    console.log('username from home:', username)
+    console.log('access token from home:', accessToken)
 
     useEffect(() => {
         const fetchCurrentSongCollections = async() => {
