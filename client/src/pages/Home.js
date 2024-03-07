@@ -41,7 +41,6 @@ const Home = ({ code, state }) => {
             </div>
         </div>
     )
-
 }
 
 export default Home
