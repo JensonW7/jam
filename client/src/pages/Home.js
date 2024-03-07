@@ -4,7 +4,9 @@ import '../index.css'
 
 // components
 import SongCollection from '../components/SongCollection'
+import SearchForm from '../components/SearchForm'
 import useAuth from '../hooks/useAuth'
+
 //context
 import { useUserContext } from '../hooks/useUserContext'
 
@@ -39,6 +41,7 @@ const Home = ({ code, state }) => {
             </div>
         </div>
     )
+
 }
 
 export default Home

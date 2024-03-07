@@ -20,12 +20,10 @@ export default function useAuth(code, state) {
             const json = await response.json()
 
             if (response.ok) {
-                console.log('response token:', json.access_token)
                 dispatch({
                     type: 'SET_ACCESSTOKEN',
                     payload: json.access_token
                 })
-                // setAccessToken(json.access_token)
             }
         }
 

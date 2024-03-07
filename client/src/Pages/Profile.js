@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 // const session = require('express-session')
 
-import { useUserContext } from '../src/hooks/useUserContext'
+import { useUserContext } from '../hooks/useUserContext'
 
 const Profile = () => {
     const {username, accessToken, dispatch} = useUserContext()
