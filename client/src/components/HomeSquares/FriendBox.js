@@ -2,27 +2,12 @@ import "./FriendBox.css";
 
 import Overlay from "../Overlay/Overlay";
 import { useState } from "react";
-import SongCollectionFinder from "./SongCollectionFinder";
 
 const FriendBox = ({ collection }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);  
-  //const [songCollection, setSongCollection] = useState(new Map());
-/*
-  setSongCollection(collection.user)
-  collection.songs.map((song) => (
-    const {song.title, song.artist, song.album};
-
-  )
-
-
-  setSongCollection(collection.songs.map((song) => {
-    songCollection.title = song.title;
-    songCollection.artist = song.artist;
-    songCollection.album = song.album;
-  }));*/
 
   return (
-    <button
+    <button 
       className="friend-box"
       onClick={() => setIsOverlayOpen(!isOverlayOpen)}
     >
@@ -41,6 +26,7 @@ const FriendBox = ({ collection }) => {
         isOpen={isOverlayOpen}
         onClose={() => setIsOverlayOpen(!isOverlayOpen)}
         username = {collection.user}
+        collection = {collection.songs}
       ></Overlay>
     </button>
   );
