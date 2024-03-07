@@ -16,12 +16,12 @@ const Profile = () => {
         const fetchUserData = async () => {
             try {
                 const [topArtistsResponse, topTracksResponse, topGenresResponse] = await Promise.all([
-                    axios.get('https://api.spotify.com/v1/me/top/artists', {
+                    axios.get('https://api.spotify.com/v1/me/top/artists?time_range=short_term', {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
                         }
                     }),
-                    axios.get('https://api.spotify.com/v1/me/top/tracks', {
+                    axios.get('https://api.spotify.com/v1/me/top/tracks?time_range=short_term', {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
                         }
@@ -66,17 +66,30 @@ const Profile = () => {
             {/* <h2>Total Minutes Played: {userData.total_minutes_played}</h2>
             <h2>Total Tracks Played: {userData.total_tracks_played}</h2> */}
             <h2>This Month's Top Tracks :</h2>
-            <ul>
-                {userData.topTracks.map(track => (
-                    <li key={track.id}>{track.name}</li>
+            <ol>
+                {userData.topTracks.slice(0,10).map(track => (
+                    <li key={track.id}>
+                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                            <img src={track.album.images[0].url} alt={track.name} style={{ width: '100px', height: '100px' }} />
+                            <h3>{track.name} </h3>
+                        </a>
+                        <div>
+                        </div>
+        
+                        </li>
                 ))}
-            </ul>
+            </ol>
             <h2>This Month's Top Artists :</h2>
-            <ul>
-                {userData.topArtists.map(artist => (
-                    <li key={artist.id}>{artist.name}</li>
+            <ol>
+                {userData.topArtists.slice(0,10).map(artist => (
+                    <li key={artist.id}>
+                        <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                        <img src={artist.images[0].url} alt={artist.name} style={{ width: '100px', height: '100px' }} />
+                            <h3>{artist.name}</h3>
+                        </a>
+                    </li>
                 ))}
-            </ul>
+            </ol>
             {/* <h2>Top Genres:</h2>
             <ul>
                 {userData.top_genres.map(genre => (
