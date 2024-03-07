@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import "../index.css";
 
 // components
-import FriendBox from "../Components/HomeSquares/FriendBox";
+import FriendBox from "../components/HomeSquares/FriendBox";
 import useAuth from "../hooks/useAuth";
 
 //context

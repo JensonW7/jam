@@ -7,7 +7,7 @@ import Login from "./pages/Login.js"
 import Profile from "./pages/Profile.js"
 
 // components
-import Navbar from "./Components/Navbar.js"
+import Navbar from "./components/Navbar.js"
 
 // auth
 const code = new URLSearchParams(window.location.search).get('code')
