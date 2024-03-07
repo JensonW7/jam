@@ -194,11 +194,6 @@ router.get('/currently-playing', async (req, res) => {
   }
 });
 
-router.get('/currently-playing', async (req, res) => {
-  const accessToken = req.session.accessToken;
-
-})
-
 module.exports = router
 
 // helper function for duration_ms
