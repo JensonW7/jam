@@ -8,7 +8,8 @@ const {
     getUser,
     getUsers,
     deleteUser,
-    updateUser
+    updateUser,
+    addFollowing
 } = require('../controllers/userController')
 
 // GET all users
@@ -24,6 +25,9 @@ router.post('/', createUser)
 router.delete('/:id', deleteUser)
 
 // UPDATE a user
-router.patch('/:id', updateUser)
+router.patch('/update/:id', updateUser)
+
+// add following to user
+router.patch('/:id', addFollowing)
 
 module.exports = router
