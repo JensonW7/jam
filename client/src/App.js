@@ -2,9 +2,9 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./Pages/Home.js"
-import Login from "./Pages/Login"
-import Profile from "./Pages/Profile"
+import Home from "./pages/Home.js"
+import Login from "./pages/Login.js"
+import Profile from "./pages/Profile.js"
 
 // components
 import Navbar from "./Components/Navbar.js"
