@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from 'react'
 import '../index.css'
 
 // components
-import SongCollection from '../components/SongCollection'
+import SongCollection from '../Components/SongCollection'
 import useAuth from '../hooks/useAuth'
 //context
 import { useUserContext } from '../hooks/useUserContext'
