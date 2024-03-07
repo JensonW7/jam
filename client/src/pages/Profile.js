@@ -112,7 +112,7 @@ const Profile = () => {
     {/* display of user data here on frontend */}
     return (
         <div>
-            <h2>This Month's Top Tracks :</h2>
+            <h2>This Month's Top Tracks:</h2>
             <ol>
                 {userData.topTracks.slice(0,10).map(track => (
                     <li key={track.id}>
@@ -127,7 +127,7 @@ const Profile = () => {
                         </li>
                 ))}
             </ol>
-            <h2>This Month's Top Artists :</h2>
+            <h2>This Month's Top Artists:</h2>
             <ol>
                 {userData.topArtists.slice(0,10).map(artist => (
                     <li key={artist.id}>
