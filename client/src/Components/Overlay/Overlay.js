@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import "./Overlay.css";
 
-export function Overlay({ isOpen, onClose, children }) {
+export function Overlay({ isOpen, onClose, children, username}) {
   return (
     <>
       {isOpen && (
@@ -16,6 +16,9 @@ export function Overlay({ isOpen, onClose, children }) {
               />
             </div>
             {children}
+            <div className="overlay_content">
+              <p>{username}</p>
+            </div>
           </div>
         </div>
       )}
