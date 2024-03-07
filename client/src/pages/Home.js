@@ -3,8 +3,19 @@ import { useContext, useEffect, useState } from "react";
 import "../index.css";
 
 // components
+<<<<<<< HEAD
 import FriendBox from "../components/HomeSquares/FriendBox";
 import useAuth from "../hooks/useAuth";
+=======
+<<<<<<<< HEAD:client/src/Pages/Home.js
+import FriendBox from "../components/HomeSquares/FriendBox";
+import useAuth from "../hooks/useAuth";
+========
+import SongCollection from '../components/SongCollection'
+import SearchForm from '../components/SearchForm'
+import useAuth from '../hooks/useAuth'
+>>>>>>>> main:client/src/pages/Home.js
+>>>>>>> main
 
 //context
 import { useUserContext } from "../hooks/useUserContext";
