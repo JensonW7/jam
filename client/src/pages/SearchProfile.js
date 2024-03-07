@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom'
 import '../index.css'
 
 // components
-import SearchForm from '../Components/SearchForm'
-import SearchProfileResult from '../Components/SearchProfileResult'
+import SearchForm from '../components/SearchForm'
+import SearchProfileResult from '../components/SearchProfileResult'
 
 const SearchProfile = () => {
     const [searchResult, setSearchResult] = useState([])
