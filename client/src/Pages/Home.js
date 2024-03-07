@@ -1,46 +1,49 @@
 // setup
-import { useContext, useEffect, useState } from 'react'
-import '../index.css'
+import { useContext, useEffect, useState } from "react";
+import "../index.css";
 
 // components
-import SongCollection from '../Components/SongCollection'
-import FriendBox from '../Components/FriendBox'
-import useAuth from '../hooks/useAuth'
+import FriendBox from "../Components/HomeSquares/FriendBox";
+import useAuth from "../hooks/useAuth";
 
 //context
-import { useUserContext } from '../hooks/useUserContext'
+import { useUserContext } from "../hooks/useUserContext";
 
 const Home = ({ code, state }) => {
-    const {username, accessToken, dispatch} = useUserContext()
-    
-    const [songCollections, setSongCollections] = useState(null)
-    useAuth(code, state)
+  const { username, accessToken, dispatch } = useUserContext();
+  const [friendBoxes, setFriendBoxes] = useState(null);
 
-    console.log('username from home:', username)
-    console.log('access token from home:', accessToken)
+  useAuth(code, state);
 
-    useEffect(() => {
-        const fetchCurrentSongCollections = async() => {
-            const response = await fetch('/api/current_songs')
-            const json = await response.json()
+  console.log("username from home:", username);
+  console.log("access token from home:", accessToken);
 
-            if (response.ok) {
-                setSongCollections(json)
-            }
-        }
+  useEffect(() => {
+    const fetchCurrentSongCollections = async () => {
+      const response = await fetch("/api/current_songs");
+      const json = await response.json();
 
-        fetchCurrentSongCollections()
-    }, [])
+      if (response.ok) {
+        setFriendBoxes(json);
+      }
+    };
 
-    return (
-        <div className="home">
-            <div className="songCollections">
-                {songCollections && songCollections.map((collection) => (
-                    <FriendBox key={collection._id} collection={collection}/>
-                ))}
-            </div>
+    fetchCurrentSongCollections();
+  }, []);
+
+  return (
+    <div className="home">
+      <div className="container">
+        <h1>Friend Activity</h1>
+        <div className="friendCollection">
+          {friendBoxes &&
+            friendBoxes.map((collection) => (
+              <FriendBox key={collection._id} collection={collection} />
+            ))}
         </div>
-    )
-}
+      </div>
+    </div>
+  );
+};
 
-export default Home
+export default Home;

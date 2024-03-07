@@ -1,7 +1,6 @@
 import { Box } from "./Box"
 import "./Grid.css";
 
-
 export function Grid(){
 
   const profiles = [
