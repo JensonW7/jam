@@ -1,12 +1,16 @@
+import Overlay from "./Overlay/Overlay";
+
 const FriendBox = ({ collection }) => {
   return (
     <div className="userContainer">
       <h4>{collection.user}</h4>
       <div className="recentSong">
-        <p><span>Song: </span></p>
+        <p>
+          <span>Song: </span>
+        </p>
       </div>
       <button className="overlayButton">
-            
+        <Overlay></Overlay>
       </button>
     </div>
   );
