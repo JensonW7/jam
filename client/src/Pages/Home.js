@@ -5,6 +5,7 @@ import '../index.css'
 // components
 import SongCollection from '../components/SongCollection'
 import useAuth from '../hooks/useAuth'
+import { useUpdateCurrentSong } from '../hooks/useUpdateCurrentSong'
 
 //context
 import { useUserContext } from '../hooks/useUserContext'
@@ -14,6 +15,7 @@ const Home = ({ code, state }) => {
     
     const [songCollections, setSongCollections] = useState(null)
     useAuth(code, state)
+    useUpdateCurrentSong()
 
     console.log('username from home:', username)
     console.log('access token from home:', accessToken)
