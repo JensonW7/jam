@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-const SearchForm = ({onsubmit}) => {
+const SearchForm = ({setSearchResult}) => {
 
     const [searchTerm, setSearchTerm] = useState("")
 
@@ -9,17 +9,31 @@ const SearchForm = ({onsubmit}) => {
         onsubmit(searchTerm)
     }
 
+    const fetchUser = async(value) => {
+        const response = await fetch('/users/' + value)
+        const json = await response.json()
+
+        if (response.ok) {
+            setSearchResult(json)
+        }
+    }
+
+    const handleChange = (value) => {
+        setSearchTerm(value)
+        fetchUser(value)
+    }
+
     function renderSearchBox({searchTerm}) {
         return (
             <form name="form" onSubmit={handleSubmit}>
-            <label> Search Profile:
-            <input 
-                type="text" 
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-            />
-            </label>
-            <input type="submit" />
+                <label> Search Profile:
+                <input 
+                    type="text" 
+                    value={searchTerm}
+                    // onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={(e) => handleChange(e.target.value)}
+                />
+                </label>
             </form>
         )
     }

@@ -1,6 +1,5 @@
 // setup
 import { useContext, useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
 import '../index.css'
 
 // components
@@ -12,7 +11,6 @@ import useAuth from '../hooks/useAuth'
 import { useUserContext } from '../hooks/useUserContext'
 
 const Home = ({ code, state }) => {
-    const navigate = useNavigate()
     const {username, accessToken, dispatch} = useUserContext()
     
     const [songCollections, setSongCollections] = useState(null)
@@ -34,16 +32,8 @@ const Home = ({ code, state }) => {
         fetchCurrentSongCollections()
     }, [])
 
-
-    function getProfiles(searchTerm) {
-        navigate("/SearchProfile?text="+searchTerm)
-    }
-
     return (
         <div className="home">
-            
-            <SearchForm onsubmit={getProfiles} />
-            
             <div className="songCollections">
                 {songCollections && songCollections.map((collection) => (
                     <SongCollection key={collection._id} collection={collection}/>

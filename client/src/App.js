@@ -34,7 +34,7 @@ function App() {
                   element={ <Profile /> }
                 />
                 <Route 
-                path='/SearchProfile'
+                path='/search'
                 element={ <SearchProfile /> }
                 />
               </Routes>
