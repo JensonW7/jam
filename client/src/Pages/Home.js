@@ -4,8 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import '../index.css'
 
 // components
-import SongCollection from '../components/SongCollection'
-import SearchForm from '../components/SearchForm'
+import SongCollection from '../Components/SongCollection'
+import SearchForm from '../Components/SearchForm'
 import useAuth from '../hooks/useAuth'
 
 //context
