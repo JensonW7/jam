@@ -46,7 +46,7 @@ const Profile = () => {
             setIsLoading(false);
         }
         };
-
+ 
         fetchUserData();
     }, []);
 
