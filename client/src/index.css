@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background: #f1f1f1;
 }
 
 code {
@@ -32,4 +33,40 @@ span {
 .navbar {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1rem;
+
+}
+
+.navbar li.active {
+  background-color: #555;
+}
+
+.navbar li:hover {
+  background-color: #777;
+}
+
+header {
+  background: #fff;
+}
+header .container {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 10px 2-px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header a {
+  color: #333;
+  text-decoration: none;
+}
+
+.pages {
+  max-width: 1400px;
+  padding: 20px;
+  margin: 0 auto;
+
 }
