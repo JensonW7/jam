@@ -97,6 +97,17 @@ const Profile = () => {
         return <div>Error: {error.message}</div>;
     }
 
+    // for 30 second preview player of the top songs
+    const PreviewPlayer = ({ previewUrl }) => {
+        return (
+            <div classname="preview-audio-player">
+                <audio controls>
+                    <source src={previewUrl} type="audio/mpeg" />
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+        );
+    };
 
     {/* display of user data here on frontend */}
     return (
@@ -108,6 +119,7 @@ const Profile = () => {
                         <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
                             <img src={track.album.images[0].url} alt={track.name} style={{ width: '100px', height: '100px' }} />
                             <h3>{track.name} </h3>
+                            <PreviewPlayer previewUrl={track.preview_url} />
                         </a>
                         <div>
                         </div>
