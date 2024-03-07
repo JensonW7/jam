@@ -9,16 +9,6 @@ const client_id = process.env.CLIENT_ID
 const client_secret = process.env.CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI
 
-// middleware
-const session = require('express-session');
-
-router.use(session({
-  secret: client_secret,
-  resave: false,
-  saveUninitialized: true,
-  cookie: { secure: false }
-}));
-
 // random string generator
 function generateRandomString(length) {
   let text = '';
@@ -44,6 +34,7 @@ router.get('/login', function (req, res) {
   }))
 })
 
+/*
 router.post('/access_token', async(req, res) => {
   const code = req.body.code
   const state = req.body.state
@@ -121,77 +112,51 @@ router.get('/callback', async (req, res) => {
   }
   res.send('Authentication successful! You can now access the Spotify data endpoints.');
 });
-
-// testing if middleware works
-/*
-router.get('/test-session', (req, res) => {
-  if (!req.session.testCount) {
-    req.session.testCount = 0;
-  }
-  req.session.testCount += 1;
-  res.send(`Session test count: ${req.session.testCount}`);
-});
 */
 
+// UPDATING THE DATABASE
 const currentSongCollection = require('../models/currentSongCollection');
-router.get('/currently-playing', async (req, res) => {
-  const accessToken = req.session.accessToken;
-  if (!accessToken) {
-    return res.status(401).json({ error: 'Unauthorized: No access token available' });
+router.post('/update-database', async (req, res) => {
+  const { username, song } = req.body;
+  console.log('Updating current song for user:', username);
+  if (!song || !song.item) {
+    return res.status(204).json({ message: 'No content currently playing' });
+  }
+  const currentSongData = song.item;
+  const durationMs = song.item.duration_ms;
+  const timestamp = song.timestamp;
+  const duration = convertMsToMinutesAndSeconds(durationMs);
+
+  // retrieving user song collection from database
+  let userSongCollection = await currentSongCollection.findOne({ user: username });
+
+  // or creating new one 
+  if (!userSongCollection) {
+    userSongCollection = new currentSongCollection({ user: username, songs: [] });
   }
 
-  try {
-    const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      } 
-    });
-
-    if (!currentlyPlayingResponse.data || !currentlyPlayingResponse.data.item) {
-      return res.status(204).json({ message: 'No content currently playing' });
-    }
-
-    console.log(currentlyPlayingResponse.data.item)
-
-    const currentSongData = currentlyPlayingResponse.data.item;
-    const durationMs = currentlyPlayingResponse.data.item.duration_ms;
-    const timestamp = currentlyPlayingResponse.data.timestamp;
-    const duration = convertMsToMinutesAndSeconds(durationMs);
-    const userId = req.session.userId; 
-
-    // retrieving user song collection from database
-    let userSongCollection = await currentSongCollection.findOne({ user: userId });
-    
-    // or creating new one 
-    if (!userSongCollection) {
-      userSongCollection = new currentSongCollection({ user: userId, songs: [] });
-    }
-
-    // if there are more than 5, update 
-    if (userSongCollection.songs.length >= 5) {
-      userSongCollection.songs.shift(); 
-    }
-
-    const songToAdd = {
-      title: currentSongData.name,
-      artist: currentSongData.artists.map(artist => artist.name).join(', '),
-      album: currentSongData.album.name,
-      image: {  // Make sure this matches the structure defined in your song schema
-        url: currentSongData.album.images[0].url,
-        height: currentSongData.album.images[0].height,
-        width: currentSongData.album.images[0].width,
-      },
-      duration: duration,
-      timestamp: timestamp
-    }
-    
-    userSongCollection.songs.push(songToAdd);
-    await userSongCollection.save();
-    res.json(userSongCollection);
-
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
+  // if there are more than 5, update 
+  if (userSongCollection.songs.length >= 5) {
+    userSongCollection.songs.shift(); 
   }
+
+  const songToAdd = {
+    title: currentSongData.name,
+    artist: currentSongData.artists.map(artist => artist.name).join(', '),
+    album: currentSongData.album.name,
+    image: {  
+      url: currentSongData.album.images[0].url,
+      height: currentSongData.album.images[0].height,
+      width: currentSongData.album.images[0].width,
+    },
+    duration: duration,
+    timestamp: timestamp
+  }
+
+  userSongCollection.songs.push(songToAdd);
+  await userSongCollection.save();
+  res.json(userSongCollection);
+
 });
 
 module.exports = router
