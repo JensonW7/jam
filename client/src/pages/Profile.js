@@ -1,21 +1,25 @@
+// imports
 import { useEffect, useState } from 'react'
 import axios from 'axios'
-// const session = require('express-session')
-
 import { useUserContext } from '../hooks/useUserContext'
 
 const Profile = () => {
+    // react context to share accessToken to access Spotify data
     const {username, accessToken, dispatch} = useUserContext()
 
+    // setting variables
     const [userData, setUserData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState(null);
+    const [topGenres, setTopGenres] = useState([]);
 
+    // get user's top artists and tracks using short term (4 weeks) data
+    // GET request with axios 
+    // use accesstoken from react context to get said data
     useEffect(() => {
-        // get the user's top artists and top tracks
         const fetchUserData = async () => {
             try {
-                const [topArtistsResponse, topTracksResponse, topGenresResponse] = await Promise.all([
+                const [topArtistsResponse, topTracksResponse] = await Promise.all([
                     axios.get('https://api.spotify.com/v1/me/top/artists?time_range=short_term', {
                         headers: {
                             'Authorization': `Bearer ${accessToken}`
@@ -26,15 +30,49 @@ const Profile = () => {
                             'Authorization': `Bearer ${accessToken}`
                         }
                     }),
-                ]);
+                ], [accessToken]);
 
+
+        // direct data from Spotify 
         const userData = {
-            // totalMinutesPlayed: calculateTotalMinutes(topTracksResponse.data.items),
-            // totalTracksPlayed: topTracksResponse.data.items.length,
             topArtists: topArtistsResponse.data.items,
             topTracks: topTracksResponse.data.items,
-            // topGenres: extractTopGenres(topGenresResponse.data.items),
         };
+
+        // for calcualting top genre with both top artists and top tracks
+        // 1) use artist as parameter for flatMap array and accesses their respective genres array
+        // 2) use track as a parameter for flatMap array and accesses their respective genres array
+        // filter Boolean rids of undefined (or null) values that are set (this error was found)
+        const topArtistsGenres = topArtistsResponse.data.items.flatMap(artist => artist.genres).filter(Boolean);
+        const topTracksGenres = topTracksResponse.data.items.flatMap(track => track.album.genres).filter(Boolean);
+        
+        // we want to calculate top genre via both methods, combine the 2 to a single array named genres
+        const genres = [...topArtistsGenres, ...topTracksGenres];
+
+        // store genre counts
+        const genreCounts = {};
+        // iterate through the genres 
+        for (const genre of genres) {
+            // if the genre is already in genreCounts, increment count by 1
+            // if not, initialize count to 1
+         if (genreCounts[genre]) {
+                genreCounts[genre]++;
+        } else {
+            genreCounts[genre] = 1;
+            }   
+        }       
+
+        // sort genres by frequency
+        // Object.keys returns array of keys (which are the genre names)
+        // sort((a, b)) => [b] - [a] sorts based on computing the difference between 2 genres
+        // if the result is positive, a comes before b and if negative, b comes before a etc.
+        const sortedGenres = Object.keys(genreCounts).sort((a, b) => genreCounts[b] - genreCounts[a]);
+
+        // get top 5 genres
+        const topFiveGenres = sortedGenres.slice(0, 10);
+        // set top genres in state
+        setTopGenres(topFiveGenres);
+        setIsLoading(false);
 
         // handle response data and set it to state
         setUserData(userData);
@@ -63,8 +101,6 @@ const Profile = () => {
     {/* display of user data here on frontend */}
     return (
         <div>
-            {/* <h2>Total Minutes Played: {userData.total_minutes_played}</h2>
-            <h2>Total Tracks Played: {userData.total_tracks_played}</h2> */}
             <h2>This Month's Top Tracks :</h2>
             <ol>
                 {userData.topTracks.slice(0,10).map(track => (
@@ -90,12 +126,12 @@ const Profile = () => {
                     </li>
                 ))}
             </ol>
-            {/* <h2>Top Genres:</h2>
-            <ul>
-                {userData.top_genres.map(genre => (
-                    <li key={genre}>{genre}</li>
+            <h2>This Months's Top 10 Genres:</h2>
+            <ol>
+                {topGenres.map((genre, index) => (
+                    <li key={index}>{genre}</li>
                 ))}
-            </ul> */}
+            </ol>
         </div>
     );
 };
