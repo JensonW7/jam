@@ -2,13 +2,13 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
-import Home from "./pages/Home.js"
-import Login from "./pages/Login"
-import Profile from "./pages/Profile"
-import SearchProfile from './pages/SearchProfile.js'
+import Home from "./Pages/Home.js"
+import Login from "./Pages/Login"
+import Profile from "./Pages/Profile"
+import SearchProfile from './Pages/SearchProfile.js'
 
 // components
-import Navbar from "./components/Navbar.js"
+import Navbar from "./Components/Navbar.js"
 
 // auth
 const code = new URLSearchParams(window.location.search).get('code')
