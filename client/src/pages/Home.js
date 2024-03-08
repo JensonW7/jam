@@ -15,24 +15,41 @@ import { useUserContext } from "../hooks/useUserContext";
 const Home = ({ code, state }) => {
   const { username, accessToken, dispatch } = useUserContext();
   const [friendBoxes, setFriendBoxes] = useState(null);
+  const [friendsArray, setFriendsArray] = useState([])
 
   useAuth(code, state);
 
-  console.log("username from home:", username);
-  console.log("access token from home:", accessToken);
-
   useEffect(() => {
-    const fetchCurrentSongCollections = async () => {
-      const response = await fetch("/api/current_songs");
-      const json = await response.json();
+    const fetchUserFriends = async () => {
+      const response = await fetch('/users/' + username)
+      const json = await response.json()
 
       if (response.ok) {
-        setFriendBoxes(json);
+        setFriendsArray(json[0].friends)
       }
-    };
+    }
 
-    fetchCurrentSongCollections();
-  }, []);
+    fetchUserFriends()
+
+  }, [username])
+
+  useEffect(() => {
+    let friendsCollectionArray = []
+    for (let i = 0; i < friendsArray.length; i++) {
+      const fetchFriendCollection = async () => {
+        const response = await fetch('/api/current_songs/' + friendsArray[i].username)
+        const json = await response.json()
+
+        if (response.ok) {
+          friendsCollectionArray.push(json)
+        }
+      }
+
+      fetchFriendCollection()
+    }
+
+    setFriendBoxes(friendsCollectionArray)
+  }, [friendsArray]);
 
   return (
     <div className="home">
