@@ -30,11 +30,11 @@ const Home = ({ code, state }) => {
 
       if (response.ok) {
         setFriendsArray(json[0].friends)
-        //console.log(json[0].friends)
       }
     }
 
     fetchUserFriends()
+    console.log(friendBoxes)
 
   }, [username])
 
@@ -47,7 +47,6 @@ const Home = ({ code, state }) => {
 
         if (response.ok) {
           friendsCollectionArray.push(json)
-          //console.log(json)
         }
       }
 
@@ -55,6 +54,7 @@ const Home = ({ code, state }) => {
     }
 
     setFriendBoxes(friendsCollectionArray)
+    console.log(friendsArray)
   }, [friendsArray]);
 
   return (
