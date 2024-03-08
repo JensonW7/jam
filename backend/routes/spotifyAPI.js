@@ -134,37 +134,20 @@ router.get('/test-session', (req, res) => {
 */
 
 const currentSongCollection = require('../models/currentSongCollection');
-router.get('/currently-playing', async (req, res) => {
-  const accessToken = req.session.accessToken;
-  if (!accessToken) {
-    return res.status(401).json({ error: 'Unauthorized: No access token available' });
-  }
-
-  try {
-    const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      } 
-    });
-
-    if (!currentlyPlayingResponse.data || !currentlyPlayingResponse.data.item) {
-      return res.status(204).json({ message: 'No content currently playing' });
-    }
-
-    console.log(currentlyPlayingResponse.data.item)
-
-    const currentSongData = currentlyPlayingResponse.data.item;
-    const durationMs = currentlyPlayingResponse.data.item.duration_ms;
-    const timestamp = currentlyPlayingResponse.data.timestamp;
+router.post('/update-database', async (req, res) => {
+    const currentSongData = req.body.song.item
+    const durationMs = currentSongData.duration_ms
+    const timestamp = req.body.song.timestamp
     const duration = convertMsToMinutesAndSeconds(durationMs);
-    const userId = req.session.userId; 
+    const username = req.body.username
 
     // retrieving user song collection from database
-    let userSongCollection = await currentSongCollection.findOne({ user: userId });
+    let userSongCollection = await currentSongCollection.findOne({ user: username });
     
+    console.log(userSongCollection)
     // or creating new one 
     if (!userSongCollection) {
-      userSongCollection = new currentSongCollection({ user: userId, songs: [] });
+      userSongCollection = new currentSongCollection({ user: username, songs: [] });
     }
 
     // if there are more than 5, update 
@@ -174,7 +157,7 @@ router.get('/currently-playing', async (req, res) => {
 
     const songToAdd = {
       title: currentSongData.name,
-      artist: currentSongData.artists.map(artist => artist.name).join(', '),
+      artist: currentSongData.artists[0].name,
       album: currentSongData.album.name,
       image: {  // Make sure this matches the structure defined in your song schema
         url: currentSongData.album.images[0].url,
@@ -182,16 +165,18 @@ router.get('/currently-playing', async (req, res) => {
         width: currentSongData.album.images[0].width,
       },
       duration: duration,
-      timestamp: timestamp
+      timestamp: timestamp,
     }
     
     userSongCollection.songs.push(songToAdd);
-    await userSongCollection.save();
-    res.json(userSongCollection);
-
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
-  }
+    try {
+      await userSongCollection.save();
+      res.json(userSongCollection);
+      console.log(userSongCollection)
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while updating the database' });
+    } 
 });
 
 module.exports = router

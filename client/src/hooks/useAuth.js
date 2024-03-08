@@ -18,6 +18,7 @@ export default function useAuth(code, state) {
                 })
             })
             const json = await response.json()
+            console.log('access token', json.access_token)
 
             if (response.ok) {
                 dispatch({
