@@ -26,6 +26,7 @@ const Home = ({ code, state }) => {
 
       if (response.ok) {
         setFriendsArray(json[0].friends)
+        //console.log(json[0].friends)
       }
     }
 
@@ -42,6 +43,7 @@ const Home = ({ code, state }) => {
 
         if (response.ok) {
           friendsCollectionArray.push(json)
+          //console.log(json)
         }
       }
 
