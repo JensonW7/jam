@@ -24,8 +24,16 @@
   height: 400px;
 }
 
-.overlay_content {
-  
+.song-info {
+  background-color: rgb(205, 198, 198);
+  width: 100px;
+  height: 100px;
+  padding: 20px;
+  position: relative;
+  border-radius: 10px;
+  border-color: transparent;
+  margin: 0 auto;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
 }
 
 .overlay__controls {
@@ -44,4 +52,22 @@
   background-color: transparent;
   font-size: 36px;
   cursor: pointer;
+}
+
+/* adjusting size to be implemented */
+@media (max-width: 500px) {
+  section {
+    padding: 20px 20px;
+  }
+  .friend-box {
+    flex: 0 0 calc(50% - 20px);
+    max-width: calc(50% - 20px);
+  }
+}
+
+@media (max-width: 969px) {
+  .friend-box {
+    flex: 0 0 100%;
+    max-width: 100%;
+  }
 }

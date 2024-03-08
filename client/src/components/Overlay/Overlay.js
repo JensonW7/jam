@@ -25,7 +25,7 @@ export function Overlay({ isOpen, onClose, children, username, songCollection}) 
                         <p> Song: {song.title}</p>
                         <p> Artist: {song.artist}</p>
                         <p> Album: {song.album}</p>
-                    </div>
+                     </div>
                 ))}
               </div>
             </div>

@@ -2,24 +2,9 @@ import "./FriendBox.css";
 
 import Overlay from "../Overlay/Overlay";
 import { useState } from "react";
-import SongCollectionFinder from "./SongCollectionFinder";
 
 const FriendBox = ({ collection }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);  
-  //const [songCollection, setSongCollection] = useState(new Map());
-/*
-  setSongCollection(collection.user)
-  collection.songs.map((song) => (
-    const {song.title, song.artist, song.album};
-
-  )
-
-
-  setSongCollection(collection.songs.map((song) => {
-    songCollection.title = song.title;
-    songCollection.artist = song.artist;
-    songCollection.album = song.album;
-  }));*/
 
   return (
     <button
@@ -36,11 +21,14 @@ const FriendBox = ({ collection }) => {
           height="200"
         ></img>
         <p> {"(RECENT SONG)"} </p>
+        <p> {"(SONG ARTIST)"} </p>
+
       </div>
       <Overlay
         isOpen={isOverlayOpen}
         onClose={() => setIsOverlayOpen(!isOverlayOpen)}
         username = {collection.user}
+        songCollection = {collection.songs}
       ></Overlay>
     </button>
   );

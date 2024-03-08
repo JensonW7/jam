@@ -21,6 +21,8 @@ const FriendBox = ({ collection }) => {
           height="200"
         ></img>
         <p> {"(RECENT SONG)"} </p>
+        <p> {"(SONG ARTIST)"} </p>
+
       </div>
       <Overlay
         isOpen={isOverlayOpen}

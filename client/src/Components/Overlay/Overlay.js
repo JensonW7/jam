@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import "./Overlay.css";
 
-export function Overlay({ isOpen, onClose, children, username}) {
+export function Overlay({ isOpen, onClose, children, username, songCollection}) {
   return (
     <>
       {isOpen && (
@@ -17,7 +17,17 @@ export function Overlay({ isOpen, onClose, children, username}) {
             </div>
             {children}
             <div className="overlay_content">
-              <p>{username}</p>
+              <h1>{username}</h1>
+              <div className="songs">
+                {songCollection.map((song) => (
+                    <div className="song-info">
+                        <img src={song.img} alt="album cover" width="200" height="200"></img>
+                        <p> Song: {song.title}</p>
+                        <p> Artist: {song.artist}</p>
+                        <p> Album: {song.album}</p>
+                     </div>
+                ))}
+              </div>
             </div>
           </div>
         </div>
