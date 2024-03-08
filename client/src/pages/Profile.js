@@ -53,8 +53,8 @@ const Profile = () => {
         const genreCounts = {};
         // iterate through the genres 
         for (const genre of genres) {
-            // if the genre is already in genreCounts, increment count by 1
-            // if not, initialize count to 1
+        // if the genre is already in genreCounts, increment count by 1
+        // if not, initialize count to 1
          if (genreCounts[genre]) {
                 genreCounts[genre]++;
         } else {
