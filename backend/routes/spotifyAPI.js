@@ -122,22 +122,11 @@ router.get('/callback', async (req, res) => {
   res.send('Authentication successful! You can now access the Spotify data endpoints.');
 });
 
-// testing if middleware works
-/*
-router.get('/test-session', (req, res) => {
-  if (!req.session.testCount) {
-    req.session.testCount = 0;
-  }
-  req.session.testCount += 1;
-  res.send(`Session test count: ${req.session.testCount}`);
-});
-*/
-
 const currentSongCollection = require('../models/currentSongCollection');
 router.post('/update-database', async (req, res) => {
     const currentSongData = req.body.song.item
     const durationMs = currentSongData.duration_ms
-    const timestamp = req.body.song.timestamp
+    const timestamp = convertUnixTimestamp(req.body.song.timestamp)
     const duration = convertMsToMinutesAndSeconds(durationMs);
     const username = req.body.username
 
@@ -173,6 +162,7 @@ router.post('/update-database', async (req, res) => {
       await userSongCollection.save();
       res.json(userSongCollection);
       console.log(userSongCollection)
+      
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: 'An error occurred while updating the database' });
@@ -186,4 +176,10 @@ function convertMsToMinutesAndSeconds(milliseconds) {
   const minutes = Math.floor(milliseconds / 60000);
   const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds; 
+}
+
+// helper function for timestamp
+function convertUnixTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleString(); 
 }
