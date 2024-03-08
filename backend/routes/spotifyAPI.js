@@ -133,28 +133,6 @@ router.post('/update-database', async (req, res) => {
     // retrieving user song collection from database
     let userSongCollection = await currentSongCollection.findOne({ user: username });
     
-    console.log(userSongCollection)
-    // or creating new one 
-    if (!userSongCollection) {
-      const makeNewSongCollection = async () => {
-        const repsonse = await fetch('/api/current_songs', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
-          body: {
-            user: username,
-            songs: [songToAdd]
-          }
-        })
-      }
-    }
-
-    // if there are more than 5, update 
-    if (userSongCollection.songs.length >= 5) {
-      userSongCollection.songs.shift(); 
-    }
-
     const songToAdd = {
       title: currentSongData.name,
       artist: currentSongData.artists[0].name,
@@ -168,7 +146,21 @@ router.post('/update-database', async (req, res) => {
       timestamp: timestamp,
     }
     
-    userSongCollection.songs.push(songToAdd);
+    console.log(userSongCollection)
+    // or creating new one 
+    if (!userSongCollection) {
+      userSongCollection = new currentSongCollection({
+          user: username,
+          songs: [songToAdd] 
+      });
+  } else {
+      if (userSongCollection.songs.length >= 5) {
+          userSongCollection.songs.shift();
+      }
+      
+      // add the new song
+      userSongCollection.songs.push(songToAdd);
+  }
     try {
       await userSongCollection.save();
       res.json(userSongCollection);

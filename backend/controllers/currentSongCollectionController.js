@@ -37,9 +37,9 @@ const createCurrentSongCollection = async (req, res) => {
 
 // delete a current song
 const deleteCurrentSongCollection = async (req, res) => {
-    const { userId } = req.params
+    const { username } = req.params
 
-    const current_song = await currentSongCollection.findOneAndDelete({ user: userId });
+    const current_song = await currentSongCollection.findOneAndDelete({ user: username });
     if (!current_song) {
         return res.status(404).json({error: "song doesn't exist"})
     }
