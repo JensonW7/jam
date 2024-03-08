@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./Pages/Home.js"
 import Login from "./Pages/Login"
 import Profile from "./Pages/Profile"
+import SearchProfile from './Pages/SearchProfile.js'
 
 // components
 import Navbar from "./Components/Navbar.js"
@@ -31,6 +32,10 @@ function App() {
                 <Route 
                   path='/profile'
                   element={ <Profile /> }
+                />
+                <Route 
+                path='/search'
+                element={ <SearchProfile /> }
                 />
               </Routes>
             </div>

@@ -13,7 +13,7 @@ const getUsers = async (req, res) => {
 // get a single user
 const getUser = async (req, res) => {
     const { id } = req.params
-    const user = await userCollection.find({'username': id})
+    const user = await userCollection.find({'username': {$regex: id}})
 
     if (user.length == 0) {
         return res.status(404).json({error: "user doesn't exist"})
@@ -53,6 +53,7 @@ const deleteUser = async (req, res) => {
 
 // update a user
 const updateUser = async (req, res) => {
+    console.log('called')
     const { id } = req.params
 
     if (!mongoose.Types.ObjectId.isValid(id)) {
@@ -70,10 +71,40 @@ const updateUser = async (req, res) => {
     res.status(200).json(user)
 }
 
+// add following
+const addFollowing = async (req, res) => {
+    const { id } = req.params
+    
+    const user = await userCollection.findOne({username: id})
+
+    following = (id == req.body.user)
+    newFriends = user.friends
+
+    for (let i = 0; i < newFriends.length; i++) {
+        friend = JSON.parse(JSON.stringify(newFriends[i]))
+        if (friend.username == req.body.user) {
+            following = true
+        }
+    }
+
+    if (!following) {
+        newFriends.push({username: req.body.user})
+
+        const updated = await userCollection.findOneAndUpdate({username: id}, {$set: {friends: newFriends}})
+
+        if (!updated) {
+            res.status(404).json({error: "couldn't follow user"})
+        }
+    }
+
+    res.status(200).json(user)
+}
+
 module.exports = {
     getUsers,
     getUser,
     createUser,
     deleteUser,
-    updateUser
+    updateUser,
+    addFollowing
 }
