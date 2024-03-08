@@ -7,7 +7,7 @@ const FriendBox = ({ collection }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);  
 
   return (
-    <button 
+    <button
       className="friend-box"
       onClick={() => setIsOverlayOpen(!isOverlayOpen)}
     >
@@ -26,7 +26,7 @@ const FriendBox = ({ collection }) => {
         isOpen={isOverlayOpen}
         onClose={() => setIsOverlayOpen(!isOverlayOpen)}
         username = {collection.user}
-        collection = {collection.songs}
+        songCollection = {collection.songs}
       ></Overlay>
     </button>
   );

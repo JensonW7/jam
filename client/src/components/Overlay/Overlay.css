@@ -24,13 +24,6 @@
   height: 400px;
 }
 
-.overlay_song-info {
-  background: #fff;
-  position: relative;
-
-
-}
-
 .overlay__controls {
   display: flex;
   justify-content: flex-end;
