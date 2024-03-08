@@ -9,6 +9,16 @@ const client_id = process.env.CLIENT_ID
 const client_secret = process.env.CLIENT_SECRET
 const redirect_uri = process.env.REDIRECT_URI
 
+// middleware
+const session = require('express-session');
+
+router.use(session({
+  secret: client_secret,
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }
+}));
+
 // random string generator
 function generateRandomString(length) {
   let text = '';
@@ -34,7 +44,6 @@ router.get('/login', function (req, res) {
   }))
 })
 
-/*
 router.post('/access_token', async(req, res) => {
   const code = req.body.code
   const state = req.body.state
@@ -112,51 +121,62 @@ router.get('/callback', async (req, res) => {
   }
   res.send('Authentication successful! You can now access the Spotify data endpoints.');
 });
+
+// testing if middleware works
+/*
+router.get('/test-session', (req, res) => {
+  if (!req.session.testCount) {
+    req.session.testCount = 0;
+  }
+  req.session.testCount += 1;
+  res.send(`Session test count: ${req.session.testCount}`);
+});
 */
 
-// UPDATING THE DATABASE
 const currentSongCollection = require('../models/currentSongCollection');
 router.post('/update-database', async (req, res) => {
-  const { username, song } = req.body;
-  console.log('Updating current song for user:', username);
-  if (!song || !song.item) {
-    return res.status(204).json({ message: 'No content currently playing' });
-  }
-  const currentSongData = song.item;
-  const durationMs = song.item.duration_ms;
-  const timestamp = song.timestamp;
-  const duration = convertMsToMinutesAndSeconds(durationMs);
+    const currentSongData = req.body.song.item
+    const durationMs = currentSongData.duration_ms
+    const timestamp = req.body.song.timestamp
+    const duration = convertMsToMinutesAndSeconds(durationMs);
+    const username = req.body.username
 
-  // retrieving user song collection from database
-  let userSongCollection = await currentSongCollection.findOne({ user: username });
+    // retrieving user song collection from database
+    let userSongCollection = await currentSongCollection.findOne({ user: username });
+    
+    console.log(userSongCollection)
+    // or creating new one 
+    if (!userSongCollection) {
+      userSongCollection = new currentSongCollection({ user: username, songs: [] });
+    }
 
-  // or creating new one 
-  if (!userSongCollection) {
-    userSongCollection = new currentSongCollection({ user: username, songs: [] });
-  }
+    // if there are more than 5, update 
+    if (userSongCollection.songs.length >= 5) {
+      userSongCollection.songs.shift(); 
+    }
 
-  // if there are more than 5, update 
-  if (userSongCollection.songs.length >= 5) {
-    userSongCollection.songs.shift(); 
-  }
-
-  const songToAdd = {
-    title: currentSongData.name,
-    artist: currentSongData.artists.map(artist => artist.name).join(', '),
-    album: currentSongData.album.name,
-    image: {  
-      url: currentSongData.album.images[0].url,
-      height: currentSongData.album.images[0].height,
-      width: currentSongData.album.images[0].width,
-    },
-    duration: duration,
-    timestamp: timestamp
-  }
-
-  userSongCollection.songs.push(songToAdd);
-  await userSongCollection.save();
-  res.json(userSongCollection);
-
+    const songToAdd = {
+      title: currentSongData.name,
+      artist: currentSongData.artists[0].name,
+      album: currentSongData.album.name,
+      image: {  // Make sure this matches the structure defined in your song schema
+        url: currentSongData.album.images[0].url,
+        height: currentSongData.album.images[0].height,
+        width: currentSongData.album.images[0].width,
+      },
+      duration: duration,
+      timestamp: timestamp,
+    }
+    
+    userSongCollection.songs.push(songToAdd);
+    try {
+      await userSongCollection.save();
+      res.json(userSongCollection);
+      console.log(userSongCollection)
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while updating the database' });
+    } 
 });
 
 module.exports = router
