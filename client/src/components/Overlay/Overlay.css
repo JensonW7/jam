@@ -24,6 +24,10 @@
   height: 400px;
 }
 
+.overlay_content {
+  
+}
+
 .overlay__controls {
   display: flex;
   justify-content: flex-end;
