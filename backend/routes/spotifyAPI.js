@@ -122,59 +122,20 @@ router.get('/callback', async (req, res) => {
   res.send('Authentication successful! You can now access the Spotify data endpoints.');
 });
 
-// testing if middleware works
-/*
-router.get('/test-session', (req, res) => {
-  if (!req.session.testCount) {
-    req.session.testCount = 0;
-  }
-  req.session.testCount += 1;
-  res.send(`Session test count: ${req.session.testCount}`);
-});
-*/
-
 const currentSongCollection = require('../models/currentSongCollection');
-router.get('/currently-playing', async (req, res) => {
-  const accessToken = req.session.accessToken;
-  if (!accessToken) {
-    return res.status(401).json({ error: 'Unauthorized: No access token available' });
-  }
-
-  try {
-    const currentlyPlayingResponse = await axios.get('https://api.spotify.com/v1/me/player/currently-playing', {
-      headers: {
-        'Authorization': `Bearer ${accessToken}`
-      } 
-    });
-
-    if (!currentlyPlayingResponse.data || !currentlyPlayingResponse.data.item) {
-      return res.status(204).json({ message: 'No content currently playing' });
-    }
-
-    console.log(currentlyPlayingResponse.data.item)
-
-    const currentSongData = currentlyPlayingResponse.data.item;
-    const durationMs = currentlyPlayingResponse.data.item.duration_ms;
-    const timestamp = currentlyPlayingResponse.data.timestamp;
+router.post('/update-database', async (req, res) => {
+    const currentSongData = req.body.song.item
+    const durationMs = currentSongData.duration_ms
+    const timestamp = convertUnixTimestamp(req.body.song.timestamp)
     const duration = convertMsToMinutesAndSeconds(durationMs);
-    const userId = req.session.userId; 
+    const username = req.body.username
 
     // retrieving user song collection from database
-    let userSongCollection = await currentSongCollection.findOne({ user: userId });
+    let userSongCollection = await currentSongCollection.findOne({ user: username });
     
-    // or creating new one 
-    if (!userSongCollection) {
-      userSongCollection = new currentSongCollection({ user: userId, songs: [] });
-    }
-
-    // if there are more than 5, update 
-    if (userSongCollection.songs.length >= 5) {
-      userSongCollection.songs.shift(); 
-    }
-
     const songToAdd = {
       title: currentSongData.name,
-      artist: currentSongData.artists.map(artist => artist.name).join(', '),
+      artist: currentSongData.artists[0].name,
       album: currentSongData.album.name,
       image: {  // Make sure this matches the structure defined in your song schema
         url: currentSongData.album.images[0].url,
@@ -182,22 +143,34 @@ router.get('/currently-playing', async (req, res) => {
         width: currentSongData.album.images[0].width,
       },
       duration: duration,
-      timestamp: timestamp
+      timestamp: timestamp,
     }
     
-    userSongCollection.songs.push(songToAdd);
-    await userSongCollection.save();
-    res.json(userSongCollection);
-
-  } catch (error) {
-    res.status(500).json({ error: 'Failed to retrieve currently playing song from Spotify', details: error.message });
+    console.log(userSongCollection)
+    // or creating new one 
+    if (!userSongCollection) {
+      userSongCollection = new currentSongCollection({
+          user: username,
+          songs: [songToAdd] 
+      });
+  } else {
+      if (userSongCollection.songs.length >= 5) {
+          userSongCollection.songs.shift();
+      }
+      
+      // add the new song
+      userSongCollection.songs.push(songToAdd);
   }
+    try {
+      await userSongCollection.save();
+      res.json(userSongCollection);
+      console.log(userSongCollection)
+      
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while updating the database' });
+    } 
 });
-
-router.get('/currently-playing', async (req, res) => {
-  const accessToken = req.session.accessToken;
-
-})
 
 module.exports = router
 
@@ -206,4 +179,10 @@ function convertMsToMinutesAndSeconds(milliseconds) {
   const minutes = Math.floor(milliseconds / 60000);
   const seconds = ((milliseconds % 60000) / 1000).toFixed(0);
   return minutes + ":" + (seconds < 10 ? '0' : '') + seconds; 
+}
+
+// helper function for timestamp
+function convertUnixTimestamp(timestamp) {
+  const date = new Date(timestamp);
+  return date.toLocaleString(); 
 }
