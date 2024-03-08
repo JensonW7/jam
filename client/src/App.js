@@ -3,8 +3,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 // pages
 import Home from "./pages/Home.js"
-import Login from "./pages/Login"
-import Profile from "./pages/Profile"
+import Login from "./pages/Login.js"
+import Profile from "./pages/Profile.js"
 import SearchProfile from './pages/SearchProfile.js'
 
 // components
