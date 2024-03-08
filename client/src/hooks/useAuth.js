@@ -79,7 +79,6 @@ export default function useAuth(code, state) {
                 makeUserProfile()
             }
         }
-
         findUser()
     }, [username])
 }

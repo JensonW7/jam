@@ -15,15 +15,15 @@ const {
 router.get('/', getCurrentSongCollections)
 
 // GET single current song
-router.get('/:userId', getCurrentSongCollection)
+router.get('/:username', getCurrentSongCollection)
 
 // POST a new current song
 router.post('/', createCurrentSongCollection)
 
 // DELETE a current song
-router.delete('/:userId', deleteCurrentSongCollection)
+router.delete('/:username', deleteCurrentSongCollection)
 
 // UPDATE a current song
-router.patch('/:userId', updateCurrentSongCollection)
+router.patch('/:username', updateCurrentSongCollection)
 
 module.exports = router

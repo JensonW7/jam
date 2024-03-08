@@ -6,7 +6,9 @@ import "../index.css";
 import FriendBox from "../components/HomeSquares/FriendBox";
 
 import SearchForm from '../components/SearchForm'
+
 import useAuth from '../hooks/useAuth'
+import { useUpdateCurrentSong } from '../hooks/useUpdateCurrentSong'
 
 
 //context
@@ -16,8 +18,10 @@ const Home = ({ code, state }) => {
   const { username, accessToken, dispatch } = useUserContext();
   const [friendBoxes, setFriendBoxes] = useState(null);
   const [friendsArray, setFriendsArray] = useState([])
-
-  useAuth(code, state);
+    
+  const [songCollections, setSongCollections] = useState(null)
+  useAuth(code, state)
+  useUpdateCurrentSong()
 
   useEffect(() => {
     const fetchUserFriends = async () => {

@@ -8,6 +8,7 @@ const Login = () => {
         <button onClick={handleLogin}>Log in with Spotify</button>
       </div>
     );
-  };
+  
+  }
   
   export default Login
