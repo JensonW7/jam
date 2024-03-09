@@ -16,12 +16,12 @@ export function Overlay({ isOpen, onClose, children, username, songCollection}) 
               />
             </div>
             {children}
-            <div className="overlay_content">
-              <h1>{username}</h1>
+            <div className="overlay_content"> 
+              <h1>{username}</h1> 
               <div className="songs">
                 {songCollection.map((song) => (
                     <div className="song-info">
-                        <img src={song.img} alt="album cover" width="200" height="200"></img>
+                        <img src={song.image} alt="album cover" width="200" height="200"></img>
                         <p> Song: {song.title}</p>
                         <p> Artist: {song.artist}</p>
                         <p> Album: {song.album}</p>
