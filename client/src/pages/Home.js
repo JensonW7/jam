@@ -3,9 +3,9 @@ import { useContext, useEffect, useState } from "react";
 import "../index.css";
 
 // components
-import FriendBox from "../components/HomeSquares/FriendBox";
+import FriendBox from "../Components/HomeSquares/FriendBox";
 
-import SearchForm from "../components/SearchForm";
+import SearchForm from "../Components/SearchForm";
 
 import useAuth from "../hooks/useAuth";
 import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";
@@ -20,6 +20,7 @@ const Home = ({ code, state }) => {
 
   useAuth(code, state);
   useUpdateCurrentSong();
+  //console.log(username)
 
   /*
     useEffect(() => {
@@ -64,7 +65,9 @@ const Home = ({ code, state }) => {
 
       //Promise.all waits for all the prmises to resolve before updating the state
       const friendCollectionsArray = await Promise.all(promises);
-      setFriendBoxes(friendCollectionsArray);
+      const filteredFriendCollectionsArray = friendCollectionsArray.filter(collection => collection !== undefined);
+      setFriendBoxes(filteredFriendCollectionsArray);
+      //setFriendBoxes(friendCollectionsArray);
     };
 
     if (friendsArray.length > 0) {
