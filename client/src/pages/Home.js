@@ -52,15 +52,17 @@ const Home = ({ code, state }) => {
 
   useEffect(() => {
     const fetchFriendCollections = async () => {
+      // map function replaces former for loop to create array of promises
       const promises = friendsArray.map(async (friend) => {
         const response = await fetch("/api/current_songs/" + friend.username);
         const json = await response.json();
-  
+
         if (response.ok) {
           return json;
         }
       });
-  
+
+      //Promise.all waits for all the prmises to resolve before updating the state
       const friendCollectionsArray = await Promise.all(promises);
       setFriendBoxes(friendCollectionsArray);
     };
@@ -68,7 +70,6 @@ const Home = ({ code, state }) => {
     if (friendsArray.length > 0) {
       fetchFriendCollections();
     }
-
     /*let friendsCollectionArray = [];
     for (let i = 0; i < friendsArray.length; i++) {
       const fetchFriendCollection = async () => {
@@ -85,8 +86,8 @@ const Home = ({ code, state }) => {
     }
     console.log(friendsCollectionArray)
     setFriendBoxes(friendsCollectionArray);*/
-  }, [friendsArray]);
-  
+  }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
+
   console.log(friendBoxes);
 
   return (
