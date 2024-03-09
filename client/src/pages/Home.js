@@ -51,7 +51,25 @@ const Home = ({ code, state }) => {
   console.log(friendsArray);
 
   useEffect(() => {
-    let friendsCollectionArray = [];
+    const fetchFriendCollections = async () => {
+      const promises = friendsArray.map(async (friend) => {
+        const response = await fetch("/api/current_songs/" + friend.username);
+        const json = await response.json();
+  
+        if (response.ok) {
+          return json;
+        }
+      });
+  
+      const friendCollectionsArray = await Promise.all(promises);
+      setFriendBoxes(friendCollectionsArray);
+    };
+
+    if (friendsArray.length > 0) {
+      fetchFriendCollections();
+    }
+
+    /*let friendsCollectionArray = [];
     for (let i = 0; i < friendsArray.length; i++) {
       const fetchFriendCollection = async () => {
         const response = await fetch(
@@ -64,10 +82,11 @@ const Home = ({ code, state }) => {
         }
       };
       fetchFriendCollection();
-      setFriendBoxes(friendsCollectionArray);
     }
-    console.log(friendsCollectionArray);
-  }, []);
+    console.log(friendsCollectionArray)
+    setFriendBoxes(friendsCollectionArray);*/
+  }, [friendsArray]);
+  
   console.log(friendBoxes);
 
   return (
