@@ -21,6 +21,20 @@ const Home = ({ code, state }) => {
   useAuth(code, state);
   useUpdateCurrentSong();
 
+  /*
+    useEffect(() => {
+        const fetchCurrentSongCollections = async() => {
+            const response = await fetch('/api/current_songs')
+            const json = await response.json()
+
+            if (response.ok) {
+                setSongCollections(json)
+            }
+        }
+
+        fetchCurrentSongCollections()
+    }, [])
+*/
 
   useEffect(() => {
     const fetchUserFriends = async () => {
@@ -47,26 +61,23 @@ const Home = ({ code, state }) => {
 
         if (response.ok) {
           friendsCollectionArray.push(json);
-          setFriendBoxes(friendsCollectionArray);
-          console.log(friendsCollectionArray);
         }
       };
       fetchFriendCollection();
+      setFriendBoxes(friendsCollectionArray);
     }
-
-    console.log(friendBoxes);
-  }, [friendsArray]);
+    console.log(friendsCollectionArray);
+  }, []);
+  console.log(friendBoxes);
 
   return (
     <div className="home">
       <div className="container">
         <h1>Friend Activity</h1>
-        <div className="friendCollection">
-          {friendBoxes &&
-            friendBoxes.map((collection) => (
-              <FriendBox key={collection._id} collection={collection} />
-            ))}
-        </div>
+        {friendBoxes &&
+          friendBoxes.map((collection) => (
+            <FriendBox key={collection._id} collection={collection} />
+          ))}
       </div>
     </div>
   );
