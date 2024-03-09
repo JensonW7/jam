@@ -12,9 +12,9 @@ const getCurrentSongCollections = async (req, res) => {
 
 // get a single current song
 const getCurrentSongCollection = async (req, res) => {
-    const { userId } = req.params;
+    const { username } = req.params;
 
-    const current_song = await currentSongCollection.findOne({ user: userId });
+    const current_song = await currentSongCollection.findOne({ user: username });
 
     if (!current_song) {
         return res.status(404).json({error: "song doesn't exist"})
