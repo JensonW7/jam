@@ -16,13 +16,13 @@ const FriendBox = ({ collection }) => {
       </div>
       <div className="imgwithtext">
         <img
-          src={collection.image} //Album Cover
+          src={collection.songs[0].image.url} //Album Cover
           alt="album cover"
           width="200"
           height="200"
         ></img>
-        <p> {"(RECENT SONG)"} </p>
-        <p> {"(SONG ARTIST)"} </p>
+        <p> {collection.songs[0].title} </p>
+        <p> {collection.songs[0].artist} </p>
       </div>
       <div className="overlay">
         <Overlay

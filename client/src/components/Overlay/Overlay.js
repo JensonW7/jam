@@ -21,7 +21,7 @@ export function Overlay({ isOpen, onClose, children, username, songCollection}) 
               <div className="songs">
                 {songCollection.map((song) => (
                     <div className="song-info">
-                        <img src={song.image} alt="album cover" width="200" height="200"></img>
+                        <img src={song.image.url} alt="album cover" width="50" height="50"></img>
                         <p> Song: {song.title}</p>
                         <p> Artist: {song.artist}</p>
                         <p> Album: {song.album}</p>
