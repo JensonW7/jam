@@ -159,14 +159,14 @@ router.post('/update-database', async (req, res) => {
       }
       
       
-      console.log("Song to add:", songToAdd);
-      console.log("Songs before adding:", userSongCollection.songs);
+      //console.log("Song to add:", songToAdd);
+      //console.log("Songs before adding:", userSongCollection.songs);
       const songExists = userSongCollection.songs.some(song => song.title.trim() === songToAdd.title.trim());
-      console.log("Song exists:", songExists);
+      //console.log("Song exists:", songExists);
       if (songExists === false) {
           userSongCollection.songs.push(songToAdd);
       }
-      console.log("Songs after adding:", userSongCollection.songs);
+      //console.log("Songs after adding:", userSongCollection.songs);
   
   }
     try {
