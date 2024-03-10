@@ -158,8 +158,12 @@ router.post('/update-database', async (req, res) => {
           userSongCollection.songs.shift();
       }
       
-      const songExists = userSongCollection.songs.some(song => song.title === songToAdd.title);
-
+      const songExists = userSongCollection.songs.some(song => 
+        song.title === songToAdd.title &&
+        song.artist === songToAdd.artist &&
+        song.album === songToAdd.album &&
+        song.duration === songToAdd.duration
+    );
       // if the song does not exist, add it to the collection
       if (!songExists) {
         userSongCollection.songs.push(songToAdd);
