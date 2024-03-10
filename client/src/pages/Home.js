@@ -3,9 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import "../index.css";
 
 // components
-import FriendBox from "../Components/HomeSquares/FriendBox";
-
-import SearchForm from "../Components/SearchForm";
+import FriendBox from "../components/HomeSquares/FriendBox";
 
 import useAuth from "../hooks/useAuth";
 import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";
@@ -20,22 +18,6 @@ const Home = ({ code, state }) => {
 
   useAuth(code, state);
   useUpdateCurrentSong();
-  //console.log(username)
-
-  /*
-    useEffect(() => {
-        const fetchCurrentSongCollections = async() => {
-            const response = await fetch('/api/current_songs')
-            const json = await response.json()
-
-            if (response.ok) {
-                setSongCollections(json)
-            }
-        }
-
-        fetchCurrentSongCollections()
-    }, [])
-*/
 
   useEffect(() => {
     const fetchUserFriends = async () => {
@@ -67,28 +49,12 @@ const Home = ({ code, state }) => {
       const friendCollectionsArray = await Promise.all(promises);
       const filteredFriendCollectionsArray = friendCollectionsArray.filter(collection => collection !== undefined);
       setFriendBoxes(filteredFriendCollectionsArray);
-      //setFriendBoxes(friendCollectionsArray);
     };
 
     if (friendsArray.length > 0) {
       fetchFriendCollections();
     }
-    /*let friendsCollectionArray = [];
-    for (let i = 0; i < friendsArray.length; i++) {
-      const fetchFriendCollection = async () => {
-        const response = await fetch(
-          "/api/current_songs/" + friendsArray[i].username
-        );
-        const json = await response.json();
 
-        if (response.ok) {
-          friendsCollectionArray.push(json);
-        }
-      };
-      fetchFriendCollection();
-    }
-    console.log(friendsCollectionArray)
-    setFriendBoxes(friendsCollectionArray);*/
   }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
 
   console.log(friendBoxes);

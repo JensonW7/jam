@@ -19,21 +19,9 @@
   border-radius: 30px;
   margin: auto;
   z-index: 10;
-  padding: 30px;
-  width: 500px;
-  height: 400px;
-}
-
-.song-info {
-  background-color: rgb(205, 198, 198);
-  width: 100px;
-  height: 100px;
-  padding: 20px;
-  position: relative;
-  border-radius: 10px;
-  border-color: transparent;
-  margin: 0 auto;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  padding: 50px;
+  width:50%;
+  height: 70%;
 }
 
 .overlay__controls {
@@ -54,20 +42,22 @@
   cursor: pointer;
 }
 
-/* adjusting size to be implemented */
-@media (max-width: 500px) {
-  section {
-    padding: 20px 20px;
-  }
-  .friend-box {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
+.overlay_content {
+  height: 90%;
+  width: 100%;
 }
 
-@media (max-width: 969px) {
-  .friend-box {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
+.songs {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.song-info {
+  border: 2px solid #333;
+  width: 150px;
+  height: 150px;
+  padding: 10px;
 }

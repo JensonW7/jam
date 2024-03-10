@@ -14,15 +14,18 @@ const FriendBox = ({ collection }) => {
       <div className="Username">
         <h4>{collection.user}</h4>
       </div>
-      <div className="imgwithtext">
+      <div className="front-song">
         <img
-          src={collection.songs[0].image.url} //Album Cover
+          src={collection.songs[collection.songs.length - 1].image.url} //Album Cover
           alt="album cover"
           width="200"
           height="200"
         ></img>
-        <p> {collection.songs[0].title} </p>
-        <p> {collection.songs[0].artist} </p>
+        <p> {collection.songs[collection.songs.length - 1].title} </p>
+        <p> {collection.songs[collection.songs.length - 1].artist} </p>
+      </div>
+      <div className="timestamp">
+        <p> {collection.songs[collection.songs.length - 1].timestamp}</p>
       </div>
       <div className="overlay">
         <Overlay
