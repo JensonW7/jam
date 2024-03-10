@@ -53,8 +53,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 20px;
-  justify-content: center;
-  align-items: center;
+
 }
 
 .song-info {
@@ -65,8 +64,21 @@
   padding: 10px;
 }
 
+.song-info img {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+
+}
+
 .song-info p {
-  color: rgb(240, 240, 240);
+  color: white;
+  font-size: 10px;
+  text-align: center;
+
 }
 
 /* Media query for smaller screens, adjust as needed */

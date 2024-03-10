@@ -19,11 +19,6 @@ span {
   font-weight: bold;
 }
 
-/* need to center the FriendSquares */
-.container {
-  margin: auto;
-}
-
 .friendCollection {
   max-width: 1300px;
   width: 100%;
@@ -71,20 +66,3 @@ header a {
   margin: 0 auto;
 }
 
-/* to resize the squares */
-@media (max-width: 969px) {
-  section {
-    padding: 20px 20px;
-  }
-  .friend-box {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 969px) {
-  .friend-box {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}

@@ -2,12 +2,15 @@
   background: #fff;
   border-radius: 10px;
   border-color: transparent;
-  height: 350px; 
+  height: 350px;
   width: 270px;
   padding: 20px;
   margin: 30px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .friend-box h4 {
@@ -22,7 +25,6 @@
 }
 
 .friend-box span {
-  position: absolute;
   top: 2px;
   right: 20px;
   cursor: pointer;

@@ -1,7 +1,7 @@
 import "./Overlay.css";
 
 //date fns
-import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 export function Overlay({
   isOpen,
@@ -30,15 +30,20 @@ export function Overlay({
                 {songCollection.map((song) => (
                   <div className="song-info">
                     <img
-                    src={song.image.url}
-                    alt="album cover"
-                    width="75"
-                    height="75"
+                      src={song.image.url}
+                      alt="album cover"
+                      width="75"
+                      height="75"
                     ></img>
                     <p> {song.title}</p>
                     <p> {song.artist}</p>
-                    <p> {formatDistanceToNow(new Date(song.timestamp), { addSuffix: true})}</p>
-              </div>
+                    <p>
+                      {" "}
+                      {formatDistanceToNow(new Date(song.timestamp), {
+                        addSuffix: true,
+                      })}
+                    </p>
+                  </div>
                 ))}
               </div>
             </div>

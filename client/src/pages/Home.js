@@ -1,6 +1,7 @@
 // setup
 import { useContext, useEffect, useState } from "react";
 import "../index.css";
+import "./Home.css";
 
 // components
 import FriendBox from "../components/HomeSquares/FriendBox";
@@ -57,20 +58,6 @@ const Home = ({ code, state }) => {
       fetchFriendCollections();
     }
   }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
-/*
-  useEffect(() => {
-    const fetchMyCollection = async () => {
-      const response = await fetch("/api/current_songs/" + username);
-      const json = await response.json();
-      if (response.ok) {
-        setmyBox(json);
-        console.log(myBox);
-
-      }
-    };
-    fetchMyCollection();
-    console.log(myBox);
-  }, [username]);*/
 
   return (
     <div className="home">
