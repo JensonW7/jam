@@ -67,12 +67,25 @@ const updateCurrentSongCollection = async (req, res) => {
   res.status(200).json(current_song);
 };
 
+// update likes
+const updateLikes = async (req, res) => {
+  const { username, songId } = req.body;
+
+  // get the song collection for specific user
+  const userCurrentSongs = await currentSongCollection.findOne({user: username})
+
+  // the current song is the last element of the array, so get the likes component of that
+  let likeCount = userCurrentSongs.songs[userCurrentSongs.songs.length - 1].likes
+  // increment
+  likeCount += 1
+}
+
 module.exports = {
   getCurrentSongCollections,
   getCurrentSongCollection,
   createCurrentSongCollection,
   deleteCurrentSongCollection,
   updateCurrentSongCollection,
+  updateLikes,
 };
 
-// delete a current song
