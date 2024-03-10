@@ -14,6 +14,11 @@ export const userReducer = (currentUser, action) => {
                 username: currentUser.username,
                 accessToken: action.payload
             }
+        case 'CLEAR_ACCESSTOKEN':
+            return {
+                 username: currentUser.username,
+                 accessToken: null
+            };
         default:
             return currentUser
     }

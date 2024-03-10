@@ -2,11 +2,12 @@ import { Link } from "react-router-dom"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faJar } from '@fortawesome/free-solid-svg-icons';
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
-import logout from './Logout'; 
+import useLogout from '../hooks/useLogout'; 
 
 import './styles/navbar.css'
 const Navbar = () => {
-    
+    const logout = useLogout();
+
     return (
         <header>
             <div className="navbar">
@@ -19,9 +20,7 @@ const Navbar = () => {
                 <Link to="http://localhost:4000/spotify/login">
                     <FontAwesomeIcon icon={faArrowsRotate} style={{color: "#ffffff",}} size='2x'/>
                 </Link>
-                <button onClick={logout} className="logout-button">
-                    Log Out
-                </button>
+                <button onClick={logout}>Sign Out</button>
             </div>
         </header>
     )
