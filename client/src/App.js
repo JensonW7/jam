@@ -24,7 +24,7 @@ function App() {
                 {code && <Route
                   path='/'
                   element={ <Home code={code} state={state}/> }
-                s/>}
+                />}
                 {!code && <Route 
                   path='/'
                   element={ <Login /> }
