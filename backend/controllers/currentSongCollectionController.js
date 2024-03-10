@@ -76,7 +76,7 @@ const updateLikes = async (req, res) => {
 
   // the current song is the last element of the array, so get the likes component of that
   let likeCount = userCurrentSongs.songs[userCurrentSongs.songs.length - 1].likes
-  // increment
+  // increment counter
   likeCount += 1
 }
 

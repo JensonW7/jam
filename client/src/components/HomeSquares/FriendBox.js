@@ -5,10 +5,21 @@ import "./FriendBox.css";
 
 import Overlay from "../Overlay/Overlay";
 import { useState } from "react";
+import useUpdateLikes from '../../hooks/useUpdateLikes';
 
 const FriendBox = ({ collection }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const { updateLikes} = useUpdateLikes();
 
+  const handleLikeClick = async () => {
+    try {
+      await updateLikes(collection.user, collection.songs[collection.songs.length - 1]._id);
+      console.log('Likes updated successfully!');
+    } catch (error) {
+      console.error('Error updating likes:', error);
+    }
+  };
+  
   return (
     <button
       className="friend-box"
@@ -24,6 +35,7 @@ const FriendBox = ({ collection }) => {
           width="200"
           height="200"
         ></img>
+        <button onClick={handleLikeClick}>❤️</button>
         <p> {collection.songs[collection.songs.length - 1].title} </p>
         <p> {collection.songs[collection.songs.length - 1].artist} </p>
       </div>
