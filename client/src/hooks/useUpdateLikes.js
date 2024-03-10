@@ -6,15 +6,15 @@ const useUpdateLikes = () => {
         headers: {
           'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ songId })
+        body: JSON.stringify({ 
+          username: username,
+          songId: songId
+         })
       });
-      console.log('Request URL:', url); // Log the URL to the console
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);
       }
-
-      // Optionally, you can handle the response here if needed
 
     } catch (error) {
       console.error('Error updating likes:', error);
