@@ -1,5 +1,8 @@
 import "./FriendBox.css";
 
+//date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 import Overlay from "../Overlay/Overlay";
 import { useState } from "react";
 
@@ -25,7 +28,7 @@ const FriendBox = ({ collection }) => {
         <p> {collection.songs[collection.songs.length - 1].artist} </p>
       </div>
       <div className="timestamp">
-        <p> {collection.songs[collection.songs.length - 1].timestamp}</p>
+        <p> {formatDistanceToNow(new Date(collection.songs[collection.songs.length - 1].timestamp), { addSuffix: true})}</p>
       </div>
       <div className="overlay">
         <Overlay

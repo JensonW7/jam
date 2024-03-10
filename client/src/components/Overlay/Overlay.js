@@ -1,5 +1,8 @@
 import "./Overlay.css";
 
+//date fns
+import formatDistanceToNow from 'date-fns/formatDistanceToNow'
+
 export function Overlay({
   isOpen,
   onClose,
@@ -34,6 +37,8 @@ export function Overlay({
                     ></img>
                     <p> {song.title}</p>
                     <p> {song.artist}</p>
+                    <p> {formatDistanceToNow(new Date(song.timestamp), { addSuffix: true})}</p>
+
               </div>
                 ))}
               </div>
