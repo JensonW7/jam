@@ -154,12 +154,20 @@ router.post('/update-database', async (req, res) => {
           songs: [songToAdd] 
       });
   } else {
-      if (userSongCollection.songs.length >= 5) {
+      if (userSongCollection.songs.length >= 6) {
           userSongCollection.songs.shift();
       }
       
-      // add the new song
-      userSongCollection.songs.push(songToAdd);
+      
+      console.log("Song to add:", songToAdd);
+      console.log("Songs before adding:", userSongCollection.songs);
+      const songExists = userSongCollection.songs.some(song => song.title.trim() === songToAdd.title.trim());
+      console.log("Song exists:", songExists);
+      if (songExists === false) {
+          userSongCollection.songs.push(songToAdd);
+      }
+      console.log("Songs after adding:", userSongCollection.songs);
+  
   }
     try {
       await userSongCollection.save();
