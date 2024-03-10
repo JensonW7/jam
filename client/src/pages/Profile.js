@@ -84,7 +84,7 @@ const Profile = () => {
             setIsLoading(false);
         }
         };
-
+ 
         fetchUserData();
     }, []);
 
@@ -100,7 +100,7 @@ const Profile = () => {
     // for 30 second preview player of the top songs
     const PreviewPlayer = ({ previewUrl }) => {
         return (
-            <div classname="preview-audio-player">
+            <div className="preview-audio-player">
                 <audio controls>
                     <source src={previewUrl} type="audio/mpeg" />
                     Your browser does not support the audio element.

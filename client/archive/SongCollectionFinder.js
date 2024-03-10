@@ -1,4 +1,7 @@
-const SongCollection = ({ collection }) => {
+const SongCollectionFinder = ({ collection }) => {
+    
+
+
     return (
         <div className="collection">
             <h4>{collection.user}</h4>
@@ -15,4 +18,4 @@ const SongCollection = ({ collection }) => {
     )
 }
 
-export default SongCollection
+export default SongCollectionFinder

@@ -1,48 +1,75 @@
 // setup
-import { useContext, useEffect, useState } from 'react'
-import '../index.css'
+import { useContext, useEffect, useState } from "react";
+import "../index.css";
 
 // components
-import SongCollection from '../Components/SongCollection'
-import useAuth from '../hooks/useAuth'
-import { useUpdateCurrentSong } from '../hooks/useUpdateCurrentSong'
+import FriendBox from "../components/HomeSquares/FriendBox";
+
+import useAuth from "../hooks/useAuth";
+import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";
 
 //context
-import { useUserContext } from '../hooks/useUserContext'
+import { useUserContext } from "../hooks/useUserContext";
 
 const Home = ({ code, state }) => {
-    const {username, accessToken, dispatch} = useUserContext()
-    
-    const [songCollections, setSongCollections] = useState(null)
-    useAuth(code, state)
-    useUpdateCurrentSong()
+  const { username, accessToken, dispatch } = useUserContext();
+  const [friendBoxes, setFriendBoxes] = useState(null);
+  const [friendsArray, setFriendsArray] = useState([]);
 
-    console.log('username from home:', username)
-    console.log('access token from home:', accessToken)
+  useAuth(code, state);
+  useUpdateCurrentSong();
 
-    useEffect(() => {
-        const fetchCurrentSongCollections = async() => {
-            const response = await fetch('/api/current_songs')
-            const json = await response.json()
+  useEffect(() => {
+    const fetchUserFriends = async () => {
+      const response = await fetch("/users/" + username);
+      const json = await response.json();
 
-            if (response.ok) {
-                setSongCollections(json)
-            }
+      if (response.ok) {
+        setFriendsArray(json[0].friends);
+      }
+    };
+
+    fetchUserFriends();
+  }, [username]);
+  console.log(friendsArray);
+
+  useEffect(() => {
+    const fetchFriendCollections = async () => {
+      // map function replaces former for loop to create array of promises
+      const promises = friendsArray.map(async (friend) => {
+        const response = await fetch("/api/current_songs/" + friend.username);
+        const json = await response.json();
+
+        if (response.ok) {
+          return json;
         }
+      });
 
-        fetchCurrentSongCollections()
-    }, [])
+      //Promise.all waits for all the prmises to resolve before updating the state
+      const friendCollectionsArray = await Promise.all(promises);
+      const filteredFriendCollectionsArray = friendCollectionsArray.filter(collection => collection !== undefined);
+      setFriendBoxes(filteredFriendCollectionsArray);
+    };
 
-    return (
-        <div className="home">
-            <div className="songCollections">
-                {songCollections && songCollections.map((collection) => (
-                    <SongCollection key={collection._id} collection={collection}/>
-                ))}
-            </div>
-        </div>
-    )
+    if (friendsArray.length > 0) {
+      fetchFriendCollections();
+    }
 
-}
+  }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
 
-export default Home
+  console.log(friendBoxes);
+
+  return (
+    <div className="home">
+      <div className="container">
+        <h1>Friend Activity</h1>
+        {friendBoxes &&
+          friendBoxes.map((collection) => (
+            <FriendBox key={collection._id} collection={collection} />
+          ))}
+      </div>
+    </div>
+  );
+};
+
+export default Home;
