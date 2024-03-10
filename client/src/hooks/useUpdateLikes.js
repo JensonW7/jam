@@ -1,7 +1,8 @@
 const useUpdateLikes = () => {
+
   const updateLikes = async (username, songId) => {
     try {
-      const response = await fetch(`/api/current_songs/${username}/update-likes`, {
+      const response = await fetch(`/api/current_songs/update_likes`, {
         method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'

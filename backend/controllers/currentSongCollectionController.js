@@ -71,14 +71,32 @@ const updateCurrentSongCollection = async (req, res) => {
 const updateLikes = async (req, res) => {
   const { username, songId } = req.body;
 
-  // get the song collection for specific user
-  const userCurrentSongs = await currentSongCollection.findOne({user: username})
+  try {
+    // get the user's current songs collection
+    const userCurrentSongs = await currentSongCollection.findOne({ user: username });
 
-  // the current song is the last element of the array, so get the likes component of that
-  let likeCount = userCurrentSongs.songs[userCurrentSongs.songs.length - 1].likes
-  // increment counter
-  likeCount += 1
-}
+    // error handling
+    if (!userCurrentSongs) {
+      return res.status(404).json({ message: "User's current songs collection not found." });
+    }
+
+    // find the last song in the user's songs array and increment likes
+    const lastSongIndex = userCurrentSongs.songs.length - 1;
+    userCurrentSongs.songs[lastSongIndex].likes++;
+    
+    // update the database with the modified songs array
+    const updatedUserSongs = await currentSongCollection.findOneAndUpdate(
+      { user: username },
+      { $set: { songs: userCurrentSongs.songs } },
+    );
+
+    res.status(200).json(updatedUserSongs);
+  } catch (error) {
+    console.error('Error updating likes:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 module.exports = {
   getCurrentSongCollections,
@@ -88,4 +106,3 @@ module.exports = {
   updateCurrentSongCollection,
   updateLikes,
 };
-

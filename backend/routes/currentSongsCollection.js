@@ -28,6 +28,6 @@ router.delete('/:username', deleteCurrentSongCollection)
 router.patch('/:username', updateCurrentSongCollection)
 
 // UPDATE likes
-router.patch('/:update-likes', updateLikes);
+router.patch('/update_likes', updateLikes);
 
 module.exports = router
