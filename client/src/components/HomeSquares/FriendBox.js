@@ -25,7 +25,7 @@ const FriendBox = ({ collection }) => {
             width="200"
             height="200"
           ></img>
-          <p> {collection.songs[collection.songs.length - 1].title} </p>
+          <p> <strong>{collection.songs[collection.songs.length - 1].title}</strong> </p>
           <p> {collection.songs[collection.songs.length - 1].artist} </p>
         </div>
         <div className="timestamp">

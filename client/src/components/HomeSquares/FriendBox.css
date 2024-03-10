@@ -24,6 +24,10 @@
   color: #555;
 }
 
+.friend-box p strong {
+  font-size: 1.1em;
+}
+
 .friend-box span {
   top: 2px;
   right: 20px;
@@ -36,4 +40,5 @@
 
 .timestamp {
   position: relative;
+  justify-content: flex;
 }

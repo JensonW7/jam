@@ -62,8 +62,8 @@ const Home = ({ code, state }) => {
   return (
     <div className="home">
       <div className="container">
-        <div className="friends">
-          <h1>Friend Activity</h1>
+        <h1>Friend Activity</h1>
+        <div className="friends-grid">
           {friendBoxes &&
             friendBoxes.map((collection) => (
               <FriendBox key={collection._id} collection={collection} />

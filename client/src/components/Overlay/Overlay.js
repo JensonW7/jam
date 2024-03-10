@@ -35,10 +35,9 @@ export function Overlay({
                       width="75"
                       height="75"
                     ></img>
-                    <p> {song.title}</p>
+                    <p> <strong>{song.title}</strong></p>
                     <p> {song.artist}</p>
                     <p>
-                      {" "}
                       {formatDistanceToNow(new Date(song.timestamp), {
                         addSuffix: true,
                       })}

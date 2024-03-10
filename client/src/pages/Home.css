@@ -1,26 +1,16 @@
-.friends {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust column size as needed */
-    gap: 20px; /* Adjust the gap between items as needed */
-    justify-content: center; /* Center the items horizontally */
-  }
 
+.friends-grid {
+  display: grid;
+  grid-template-columns: repeat(
+    auto-fill,
+    140px
+  ); /* Create a grid with columns 130px width */
+  gap: 20px; /* Add space between grid items */
+}
 
-
-/* to resize the squares */
-@media (max-width: 969px) {
-    section {
-      padding: 20px 20px;
-    }
-    .friend-box {
-      flex: 0 0 calc(50% - 20px);
-      max-width: calc(50% - 20px);
-    }
+/*for smallest screen with only one column*/
+@media screen and (max-width: 600px) {
+  .friends-grid {
+    grid-template-columns: 1fr; 
   }
-  
-  @media (max-width: 969px) {
-    .friend-box {
-      flex: 0 0 100%;
-      max-width: 100%;
-    }
-  }
+}
