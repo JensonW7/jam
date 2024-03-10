@@ -15,6 +15,7 @@ const Home = ({ code, state }) => {
   const { username, accessToken, dispatch } = useUserContext();
   const [friendBoxes, setFriendBoxes] = useState(null);
   const [friendsArray, setFriendsArray] = useState([]);
+  const [myBox, setmyBox] = useState(null);
 
   useAuth(code, state);
   useUpdateCurrentSong();
@@ -31,7 +32,6 @@ const Home = ({ code, state }) => {
 
     fetchUserFriends();
   }, [username]);
-  console.log(friendsArray);
 
   useEffect(() => {
     const fetchFriendCollections = async () => {
@@ -47,26 +47,39 @@ const Home = ({ code, state }) => {
 
       //Promise.all waits for all the prmises to resolve before updating the state
       const friendCollectionsArray = await Promise.all(promises);
-      const filteredFriendCollectionsArray = friendCollectionsArray.filter(collection => collection !== undefined);
+      const filteredFriendCollectionsArray = friendCollectionsArray.filter(
+        (collection) => collection !== undefined
+      );
       setFriendBoxes(filteredFriendCollectionsArray);
     };
 
     if (friendsArray.length > 0) {
       fetchFriendCollections();
     }
-
   }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
 
-  console.log(friendBoxes);
+  useEffect(() => {
+    const fetchMyCollection = async () => {
+      const response = await fetch("/api/current_songs/" + username);
+      const json = await response.json();
+      if (response.ok) {
+        setmyBox(json);
+      }
+    };
+    fetchMyCollection();
+  }, [username]);
+  console.log(myBox);
 
   return (
     <div className="home">
       <div className="container">
-        <h1>Friend Activity</h1>
-        {friendBoxes &&
-          friendBoxes.map((collection) => (
-            <FriendBox key={collection._id} collection={collection} />
-          ))}
+        <div className="friends">
+          <h1>Friend Activity</h1>
+          {friendBoxes &&
+            friendBoxes.map((collection) => (
+              <FriendBox key={collection._id} collection={collection} />
+            ))}
+        </div>
       </div>
     </div>
   );
