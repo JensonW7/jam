@@ -11,19 +11,19 @@ const SearchProfile = () => {
     const [searchResult, setSearchResult] = useState([])
 
     useEffect(() => {
-        const fetchUser = async(value) => {
-            const response = await fetch('/users/' + value)
+        const fetchUsers = async() => {
+            const response = await fetch('/users/')
             const json = await response.json()
 
             if (response.ok) {
+                console.log(json)
                 setSearchResult(json)
             }
         }
         
-        fetchUser('')
+        fetchUsers()
     }, [])
 
-    
 
     return (
         <div>
