@@ -2,6 +2,9 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useUserContext } from '../hooks/useUserContext'
+import "../styles/profile.css"
+import "../index.css"
+import "../styles/friendBox.css"
 
 const Profile = () => {
     // react context to share accessToken to access Spotify data
@@ -111,8 +114,9 @@ const Profile = () => {
 
     {/* display of user data here on frontend */}
     return (
-        <div>
-            <h2>This Month's Top Tracks :</h2>
+        <div classname = "profile">
+            <h2>This Month's Top Tracks:</h2>
+            <div classname="friend-box">
             <ol>
                 {userData.topTracks.slice(0,10).map(track => (
                     <li key={track.id}>
@@ -127,7 +131,8 @@ const Profile = () => {
                         </li>
                 ))}
             </ol>
-            <h2>This Month's Top Artists :</h2>
+            </div>
+            <h2>This Month's Top Artists:</h2>
             <ol>
                 {userData.topArtists.slice(0,10).map(artist => (
                     <li key={artist.id}>
