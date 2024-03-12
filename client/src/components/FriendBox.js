@@ -3,15 +3,21 @@ import "../styles/friendBox.css";
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as unlike} from '@fortawesome/free-solid-svg-icons';
+import { faHeart as like } from '@fortawesome/free-regular-svg-icons';
+
 import Overlay from "./Overlay";
 import { useState } from "react";
 import addLike from "../hooks/addLike";
 import removeLike from "../hooks/removeLike";
 
 const FriendBox = ({ collection }) => {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
-  const [liked, setLiked] = useState(false)
-  const [likeCount, setLikeCount] = useState(collection.songs[collection.songs.length - 1].likes)
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
+  const [likeCount, setLikeCount] = useState(
+    collection.songs[collection.songs.length - 1].likes
+  );
 
   return (
     <>
@@ -40,23 +46,33 @@ const FriendBox = ({ collection }) => {
           </p>
         </div>
         <div className="button">
-          {!liked && <button className="reaction" onClick={() => {
-            setLiked(!liked)
-            setLikeCount(likeCount + 1)
-            addLike(collection.user)
-          }}>
-            <p>like</p>
-            <p>{likeCount}</p>
-          </button>}
+          {!liked && (
+            <button
+              className="reaction"
+              onClick={() => {
+                setLiked(!liked);
+                setLikeCount(likeCount + 1);
+                addLike(collection.user);
+              }}
+            >
+              <FontAwesomeIcon icon={like}/>
+              <p>{likeCount}</p>
+            </button>
+          )}
 
-          {liked && <button className="reaction" onClick={() => {
-            setLiked(!liked)
-            setLikeCount(likeCount - 1)
-            removeLike(collection.user)
-          }}>
-            <p>unlike</p>
-            <p>{likeCount}</p>
-          </button>}
+          {liked && (
+            <button
+              className="reaction"
+              onClick={() => {
+                setLiked(!liked);
+                setLikeCount(likeCount - 1);
+                removeLike(collection.user);
+              }}
+            >
+              <FontAwesomeIcon icon={unlike}/>
+              <p>{likeCount}</p>
+            </button>
+          )}
         </div>
       </div>
       <div className="overlay">

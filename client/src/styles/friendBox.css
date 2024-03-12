@@ -47,7 +47,6 @@
   position: relative;
 }
 
-
 .friend-box button.overlay-button img {
   width: 225px;
   height: 225px;
@@ -84,6 +83,33 @@
 
 .button {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
+  bottom: 10px;
+  right: 10px;
+}
+
+.reaction {
+  background: none;
+  border: none;
+  content: "\f004";
+  color: #f1f1f1;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  outline: none;
+  font-size: 14px;
+  padding: 5px;
+}
+
+.reaction p {
+  margin: 5px;
+}
+
+.reaction p:first-child {
+  content: icon;
+  margin-bottom: 5px;
+}
+
+.reaction p:last-child {
+  font-size: 16px;
+  font-weight: bold;
 }
