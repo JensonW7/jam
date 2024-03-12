@@ -1,10 +1,10 @@
 .friend-box {
-  background: #fff;
+  background-color: #1B1C24;
   border-radius: 10px;
   border-color: transparent;
   height: 350px;
   width: 270px;
-  padding: 20px;
+  padding: 10px;
   margin: 30px;
   position: relative;
   box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
@@ -18,10 +18,17 @@
   font-size: 1.2em;
 }
 
+.friend-box img {
+  height: 225px;
+  width: 225px;
+  border-radius: 10px;
+}
+
 .friend-box p {
   margin: 0;
   font-size: 0.9em;
-  color: #555;
+  color: #ffffff;
+  text-align: left;
 }
 
 .friend-box p strong {
