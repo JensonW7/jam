@@ -18,7 +18,6 @@ export const useUpdateCurrentSong = () => {
                 if (!response.ok) throw new Error('Failed to fetch currently playing song.');
 
                 const songData = await response.json();
-                console.log(songData)
 
                 const updateResponse = await fetch('/spotify/update-database', {
                     method: 'POST',
