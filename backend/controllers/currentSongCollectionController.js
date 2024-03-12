@@ -67,12 +67,54 @@ const updateCurrentSongCollection = async (req, res) => {
   res.status(200).json(current_song);
 };
 
+// add like
+const addLike = async (req, res) => {
+  const { username } = req.params
+
+  try {
+    const songCollection = await currentSongCollection.findOne({user: username})
+    let songs = songCollection.songs
+    songs[songs.length - 1].likes++
+
+    let tempSongCollection = songCollection
+    tempSongCollection.songs = songs
+
+    const updated = await currentSongCollection.findOneAndReplace({user: username}, tempSongCollection)
+
+    res.status(200).json(updated)
+  } catch (error) {
+    res.status(400).json({error: error})
+  }
+}
+
+// remove like
+const removeLike = async(req, res) => {
+  const { username } = req.params
+
+  try {
+    const songCollection = await currentSongCollection.findOne({user: username})
+    let songs = songCollection.songs
+    if (songs[songs.length - 1].likes > 0) {
+      songs[songs.length - 1].likes--
+    }
+
+    let tempSongCollection = songCollection
+    tempSongCollection.songs = songs
+
+    const updated = await currentSongCollection.findOneAndReplace({user: username}, tempSongCollection)
+
+    res.status(200).json(updated)
+  } catch (error) {
+    res.status(400).json({error: error})
+  }
+}
+
 module.exports = {
   getCurrentSongCollections,
   getCurrentSongCollection,
   createCurrentSongCollection,
   deleteCurrentSongCollection,
   updateCurrentSongCollection,
+  addLike,
+  removeLike
 };
-
-// delete a current song
