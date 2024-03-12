@@ -80,15 +80,15 @@
   background-color: black;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-  gap: 40px;
+  gap: 30px;
   margin-left: 50%
 }
 
 .song-info {
-  background-color: white;
+  background-color: #1B1C24;
   border-radius: 5px;
-  width: 130px;
-  height: 140px;
+  width: 140px;
+  height: 175px;
   padding: 10px;
 }
 
@@ -97,15 +97,17 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: center;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
+  height: 80%;
+  width: 100%;
+  margin-left: 0.5px;
+  margin-right: 2px;
 }
 
 .song-info p {
-  color: black;
-  font-size: 12px;
-  text-align: center;
-  line-height: 0.5;
+  color: white;
+  font-size: 10px;
+  text-align: left;
+  line-height: 0.2;
 }
 
 .song-info p strong {
