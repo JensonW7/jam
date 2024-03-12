@@ -109,14 +109,14 @@
   width: 100%;
   margin-left: 0.5px;
   margin-right: 2px;
-  padding-bottom: 6px;
+  padding-bottom: 2px;
 }
 
 .song-info p {
   color: white;
   font-size: 10px;
   text-align: left;
-  line-height: 0.1;
+  line-height: 0px;
   font-family: "Poppins", sans-serif;
   padding: 2px;
 }
