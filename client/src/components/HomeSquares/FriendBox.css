@@ -1,9 +1,9 @@
 .friend-box {
-  background-color: #1B1C24;
+  background-color: #1b1c24;
   border-radius: 10px;
   border-color: transparent;
-  height: 350px;
-  width: 270px;
+  height: 360px;
+  width: 260px;
   padding: 10px;
   margin: 30px;
   position: relative;
@@ -16,12 +16,16 @@
 .friend-box h4 {
   margin: 0 0 10px 0;
   font-size: 1.2em;
+  color: #ffffff;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .friend-box img {
   height: 225px;
   width: 225px;
-  border-radius: 10px;
+  border-radius: 5px;
+  padding-bottom: 5px;
 }
 
 .friend-box p {
@@ -29,6 +33,8 @@
   font-size: 0.9em;
   color: #ffffff;
   text-align: left;
+  padding-top: 3px;
+  padding: 2px;
 }
 
 .friend-box p strong {
@@ -43,9 +49,4 @@
   padding: 6px;
   border-radius: 50%;
   color: #333;
-}
-
-.timestamp {
-  position: relative;
-  justify-content: flex;
 }

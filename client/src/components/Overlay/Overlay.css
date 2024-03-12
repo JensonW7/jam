@@ -20,7 +20,7 @@
   margin: auto;
   z-index: 10;
   padding: 50px;
-  width: 50%;
+  width: 70%;
   height: 70%;
 }
 
@@ -58,9 +58,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
   font-size: 1.9vw;
-
 }
 .username {
   inline-size: 24vw;
@@ -81,11 +80,11 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
-  margin-left: 50%
+  margin-left: 50%;
 }
 
 .song-info {
-  background-color: #1B1C24;
+  background-color: #1b1c24;
   border-radius: 5px;
   width: 140px;
   height: 180px;
@@ -101,6 +100,7 @@
   width: 100%;
   margin-left: 0.5px;
   margin-right: 2px;
+  padding-bottom: 2px;
 }
 
 .song-info p {
@@ -108,7 +108,8 @@
   font-size: 10px;
   text-align: left;
   line-height: 0.2;
-  font-family: 'Poppins', sans-serif;
+  font-family: "Poppins", sans-serif;
+  padding: 1px;
 }
 
 .song-info p strong {
