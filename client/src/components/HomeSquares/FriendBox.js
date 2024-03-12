@@ -22,15 +22,10 @@ const FriendBox = ({ collection }) => {
           <img
             src={collection.songs[collection.songs.length - 1].image.url} //Album Cover
             alt="album cover"
-            width="200"
-            height="200"
           ></img>
           <p> <strong>{collection.songs[collection.songs.length - 1].title}</strong> </p>
           <p> {collection.songs[collection.songs.length - 1].artist} </p>
-        </div>
-        <div className="timestamp">
           <p>
-            {" "}
             {formatDistanceToNow(
               new Date(collection.songs[collection.songs.length - 1].timestamp),
               { addSuffix: true }

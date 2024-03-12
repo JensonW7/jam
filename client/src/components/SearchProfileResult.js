@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useUserContext } from '../hooks/useUserContext'
 import SingleProfile from './SingleSearchResult'
+import '../styles/search.css'
 
 const SearchProfile = ({ searchResult }) => {
     const {username, accessToken, dispatch} = useUserContext()
