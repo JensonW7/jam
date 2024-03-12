@@ -95,6 +95,7 @@ const addFollowing = async (req, res) => {
     res.status(200).json(user)
 }
 
+// remove following
 const removeFollowing = async (req, res) => {
     console.log('called')
     const { id } = req.params

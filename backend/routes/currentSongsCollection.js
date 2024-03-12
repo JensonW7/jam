@@ -9,7 +9,8 @@ const {
     getCurrentSongCollections,
     deleteCurrentSongCollection,
     updateCurrentSongCollection,
-    updateLikes,
+    addLike,
+    removeLike
 } = require('../controllers/currentSongCollectionController')
 
 // GET all current songs
@@ -27,7 +28,10 @@ router.delete('/:username', deleteCurrentSongCollection)
 // UPDATE a current song
 router.patch('/:username', updateCurrentSongCollection)
 
-// UPDATE likes
-router.patch('/update_likes', updateLikes);
+// PATCH to add like
+router.patch('/add_like/:username', addLike);
+
+// PATCH to remove like
+router.patch('/remove_like/:username', removeLike)
 
 module.exports = router

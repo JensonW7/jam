@@ -5,6 +5,8 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import Overlay from "./Overlay";
 import { useState } from "react";
+import addLike from '../hooks/addLike'
+import removeLike from '../hooks/removeLike'
 
 const FriendBox = ({ collection }) => {
   const [isOverlayOpen, setIsOverlayOpen] = useState(false);
