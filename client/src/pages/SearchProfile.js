@@ -5,8 +5,8 @@ import '../index.css'
 import '../styles/search.css'
 
 // components
-import SearchForm from '../components/SearchForm'
-import SearchProfileResult from '../components/SearchProfileResult'
+import SearchForm from '../Components/SearchForm'
+import SearchProfileResult from '../Components/SearchProfileResult'
 
 const SearchProfile = () => {
     const [searchResult, setSearchResult] = useState([])

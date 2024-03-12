@@ -5,8 +5,8 @@ const Login = () => {
   };
 
   return (
-    <div className="button-container">
-      <button className="button" 
+    <div className="login-container">
+      <button className="login-button" 
         onClick={handleLogin}
         style={{
           fontSize: '1.5em', // Make the font bigger
