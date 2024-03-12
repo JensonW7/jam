@@ -116,70 +116,57 @@ const Profile = () => {
     return (
         <div>
             <h2>This Month's Top Tracks:</h2>
-            {/* <div className="track-list">
-            <ol>
-                {userData.topTracks.slice(0, 10).map(track => (
-                    <li key={track.id}>
-                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                            <div className="track-item">
-                                <img src={track.album.images[0].url} alt={track.name} />
-                                <div className="track-details">
-                                    <h3>{track.name}</h3>
-                                    <p>Artist: {track.artists.map(artist => artist.name).join(', ')}</p>
-                                    <p>Album: {track.album.name}</p>
-                                    <PreviewPlayer previewUrl={track.preview_url} />
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                ))}
-            </ol>
-        </div> */}
-
-<div className="track-list">
-            <ol>
-                {userData.topTracks.slice(0, 10).map(track => (
-                    <li key={track.id}>
-                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                            <div className="track-item">
-                                <div className="track-item-content">
-                                    <img src={track.album.images[0].url} alt={track.name} />
-                                    <div className="track-details">
-                                        <h3>{track.name}</h3>
-                                        <p>Artist: {track.artists.map(artist => artist.name).join(', ')}</p>
-                                        <p>Album: {track.album.name}</p>
-                                        <PreviewPlayer previewUrl={track.preview_url} />
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </li>
-                ))}
-            </ol>
-        </div>
+                <div className="track-container">
+                            <ol>
+                                {userData.topTracks.slice(0, 10).map(track => (
+                                    <li key={track.id}>
+                                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                            <div className="track-item">
+                                                <div className="track-item-content">
+                                                    <img src={track.album.images[0].url} alt={track.name} />
+                                                    <div className="track-details">
+                                                        <h3>{track.name}</h3>
+                                                        <p>Artist: {track.artists.map(artist => artist.name).join(', ')}</p>
+                                                        <p>Album: {track.album.name}</p>
+                                                        <PreviewPlayer previewUrl={track.preview_url} />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </li>
+                                ))}
+                            </ol>
+                </div>
 
 
             <h2>This Month's Top Artists:</h2>
-            <ol>
-                {userData.topArtists.slice(0,10).map(artist => (
-                    <li key={artist.id}>
-                        <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                        <img src={artist.images[0].url} alt={artist.name} style={{ width: '100px', height: '100px' }} />
-                            <h3>{artist.name}</h3>
-                        </a>
+            <ol className="artist-container">
+                {userData.topArtists.slice(0,10).map((artist, index) => (
+                    <li key={artist.id} className="artist-item">
+                        <div className="artist-item-content">
+                            <div>
+                                <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                                    <img src={artist.images[0].url} alt={artist.name} style={{ width: '100px', height: '100px' }} />
+                                    <h3>{artist.name}</h3>
+                                </a>
+                            </div>
+                        </div>
                     </li>
                 ))}
             </ol>
 
 
-            <h2>This Months's Top 10 Genres:</h2>
-            <ol>
-                {topGenres.map((genre, index) => (
-                    <li key={index}>{genre}</li>
-                ))}
-            </ol>
-
-
+            <h2>This Month's Top Genres:</h2>
+            <div classname="genre">
+                <ol>
+                    {topGenres.map((genre, index) => (
+                        <li key={genre}>
+                            <span>{index + 1}. </span>
+                            <span>{genre}</span>
+                        </li>
+                    ))}
+                </ol>
+            </div>
         </div>
     );
 };
