@@ -2,8 +2,8 @@
   background-color: #1b1c24;
   border-radius: 10px;
   border-color: transparent;
+  width: 260px;
   height: 370px;
-  width: 270px;
   padding: 10px;
   margin: 30px;
   position: relative;
@@ -12,6 +12,7 @@
   flex-direction: column;
   align-items: center;
   transition: all 0.3s;
+  overflow: hidden;
 }
 
 .friend-box:hover {
@@ -19,22 +20,43 @@
   cursor: pointer;
 }
 
-.friend-box h4 {
-  margin: 0 0 10px 0;
+.front-song {
+  text-align: center;
+  width: 225px;
+  height: 355px;
+  overflow: hidden;
+}
+
+.front-song h4 {
+  margin: 10px 0 10px 10px;
   font-size: 1.2em;
-  color: #ffffff;
+  color: rgb(255, 255, 255);
   padding-top: 5px;
   padding-bottom: 5px;
 }
 
-.friend-box img {
+.front-song button.overlay-button {
   height: 225px;
   width: 225px;
   border-radius: 5px;
   padding-bottom: 10px;
+  margin: 0;
+  cursor: pointer;
+  overflow: hidden;
+  position: relative;
 }
 
-.friend-box p {
+.friend-box button.overlay-button img {
+  width: 225px;
+  height: 225px;
+  border-radius: 5px;
+  object-fit: cover;
+  position: absolute; /* Position the image absolutely within the button */
+  top: 0;
+  left: 0;
+}
+
+.front-song p {
   margin: 0;
   font-size: 0.9em;
   color: #ffffff;
@@ -45,6 +67,7 @@
 
 .friend-box p strong {
   font-size: 1.1em;
+  margin: 0;
 }
 
 .friend-box span {

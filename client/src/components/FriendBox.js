@@ -11,19 +11,24 @@ const FriendBox = ({ collection }) => {
 
   return (
     <>
-      <button
-        className="friend-box"
-        onClick={() => setIsOverlayOpen(!isOverlayOpen)}
-      >
-        <div className="Username">
-          <h4>{collection.user}</h4>
-        </div>
+      <div className="friend-box">
         <div className="front-song">
-          <img
-            src={collection.songs[collection.songs.length - 1].image.url} //Album Cover
-            alt="album cover"
-          ></img>
-          <p> <strong>{collection.songs[collection.songs.length - 1].title}</strong> </p>
+          <h4>{collection.user}</h4>
+          <button
+            className="overlay-button"
+          >
+            <img
+              src={collection.songs[collection.songs.length - 1].image.url} //Album Cover
+              alt="album cover"
+              onClick={() => setIsOverlayOpen(!isOverlayOpen)}
+            ></img>
+          </button>
+          <p>
+            {" "}
+            <strong>
+              {collection.songs[collection.songs.length - 1].title}
+            </strong>{" "}
+          </p>
           <p> {collection.songs[collection.songs.length - 1].artist} </p>
           <p>
             {formatDistanceToNow(
@@ -32,7 +37,10 @@ const FriendBox = ({ collection }) => {
             )}
           </p>
         </div>
-      </button>
+        <div className="reaction">
+          
+        </div>
+      </div>
       <div className="overlay">
         <Overlay
           isOpen={isOverlayOpen}
