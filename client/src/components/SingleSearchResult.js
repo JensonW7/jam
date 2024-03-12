@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import { useUserContext } from '../hooks/useUserContext'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const SingleProfile = ({profile, friends, setFriends}) => {
     const {username, accessToken, dispatch} = useUserContext()
@@ -40,8 +42,8 @@ const SingleProfile = ({profile, friends, setFriends}) => {
     return (
         <div className="profile">
             <button key={profile._id} onClick={() => {handleClick(profile.username)}}>{profile.username}
-                {friends && friends.includes(profile.username) && <span>unfollow</span>}
-                {friends && !friends.includes(profile.username) && <span>follow</span>}
+                {friends && friends.includes(profile.username) && <span>unfollow <FontAwesomeIcon icon={faCheck} /></span>}
+                {friends && !friends.includes(profile.username) && <span>follow <FontAwesomeIcon icon={faPlus} /></span>}
             </button>
         </div>
     )
