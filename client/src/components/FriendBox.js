@@ -45,7 +45,7 @@ const FriendBox = ({ collection }) => {
             )}
           </p>
         </div>
-        <div className="button">
+        <div className="reaction-button">
           {!liked && (
             <button
               className="reaction"
