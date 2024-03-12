@@ -42,10 +42,12 @@ export function Overlay({
                       width="75"
                       height="75"
                     ></img>
+                    <div className="overflow">
                     <p>
                       {" "}
                       <strong>{song.title}</strong>
                     </p>
+                    </div>
                     <p> {song.artist}</p>
                     <p>
                       {formatDistanceToNow(new Date(song.timestamp), {

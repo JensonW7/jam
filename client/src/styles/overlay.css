@@ -116,9 +116,15 @@
   color: white;
   font-size: 10px;
   text-align: left;
-  line-height: 0.2;
+  line-height: 0.1;
   font-family: "Poppins", sans-serif;
   padding: 2px;
+}
+
+.overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .song-info p strong {
