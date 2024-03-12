@@ -1,5 +1,144 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+/* Profile.css */
 
-.profile {
+/* Body styles */
+body {
     font-family: 'Poppins', sans-serif;
+    background-color: #13131A;
+    color: #EEEEEE;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the profile content */
+.profile-container {
+    max-width: 800px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+    padding: 20px;
+    text-align: left; /* Align content to the left */
+}
+
+.profile-heading {
+    text-align: left;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #EEEEEE;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Track container styles */
+.track-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.track-details {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.track-details h3 {
+    margin: 0;
+}
+
+.track-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Individual track item */
+.track-item {
+    margin-bottom: 20px;
+}
+
+/* Track item content */
+.track-item-content {
+    background-color: #1B1C24; /* Background color */
+    border-radius: 10px; /* Border radius */
+    padding: 10px; /* Padding */
+    display: flex;
+    align-items: center;
+    position: relative; /* Make position relative */
+}
+
+/* Number in the list */
+.track-item-content::before {
+    content: counter(list-item); /* Display the number */
+    position: absolute; /* Position absolute */
+    top: 7px; /* Position from top */
+    left: 7px; /* Position from left */
+    padding: 5px; /* Padding */
+    border-radius: 50%; /* Circle border radius */
+    background-color: #EEEEEE; /* Circle background color */
+    color: #1B1C24; /* Text color */
+    font-weight: bold; /* Bold font */
+    width: 15px; /* Width of the circle */
+    height: 15px; /* Height of the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure number is above content */
+}
+
+/* Remove default list numbering */
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Image styles */
+.track-item-content img {
+    width: 100px; /* Set the width */
+    height: 100px; /* Set the height */
+    border-radius: 0%; /* Make the image circular */
+    margin-right: 20px;
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+/* Track details */
+.track-details {
+    flex: 1;
+}
+
+/* Track details */
+.track-details {
+    flex: 1;
+}
+
+/* Audio player styles */
+.preview-audio-player {
+    margin-top: 10px;
+}
+
+
+/* Adjusting audio player controls color */
+.preview-audio-player audio::-webkit-media-controls-panel {
+    background-color: rgba(49, 50, 58, 0.8); /* Adjust the background color */
+    color: #EEEEEE; /* Adjust the color of the controls */
+}
+
+.preview-audio-player audio::-webkit-media-controls-play-button {
+    color: #EEEEEE; /* Adjust the color of the play button */
+}
+
+.preview-audio-player audio::-webkit-media-controls-volume-slider {
+    background-color: rgba(49, 50, 58, 0.8); /* Adjust the background color of the volume slider */
+}
+
+/* Genres styles */
+h2:last-of-type {
+    margin-top: 20px;
+}
+
+ol:last-of-type {
+    margin-bottom: 20px;
 }

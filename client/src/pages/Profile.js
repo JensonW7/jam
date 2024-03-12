@@ -114,24 +114,51 @@ const Profile = () => {
 
     {/* display of user data here on frontend */}
     return (
-        <div classname = "profile">
+        <div>
             <h2>This Month's Top Tracks:</h2>
-            <div classname="friend-box">
+            {/* <div className="track-list">
             <ol>
-                {userData.topTracks.slice(0,10).map(track => (
+                {userData.topTracks.slice(0, 10).map(track => (
                     <li key={track.id}>
                         <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
-                            <img src={track.album.images[0].url} alt={track.name} style={{ width: '100px', height: '100px' }} />
-                            <h3>{track.name} </h3>
-                            <PreviewPlayer previewUrl={track.preview_url} />
+                            <div className="track-item">
+                                <img src={track.album.images[0].url} alt={track.name} />
+                                <div className="track-details">
+                                    <h3>{track.name}</h3>
+                                    <p>Artist: {track.artists.map(artist => artist.name).join(', ')}</p>
+                                    <p>Album: {track.album.name}</p>
+                                    <PreviewPlayer previewUrl={track.preview_url} />
+                                </div>
+                            </div>
                         </a>
-                        <div>
-                        </div>
-        
-                        </li>
+                    </li>
                 ))}
             </ol>
-            </div>
+        </div> */}
+
+<div className="track-list">
+            <ol>
+                {userData.topTracks.slice(0, 10).map(track => (
+                    <li key={track.id}>
+                        <a href={track.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                            <div className="track-item">
+                                <div className="track-item-content">
+                                    <img src={track.album.images[0].url} alt={track.name} />
+                                    <div className="track-details">
+                                        <h3>{track.name}</h3>
+                                        <p>Artist: {track.artists.map(artist => artist.name).join(', ')}</p>
+                                        <p>Album: {track.album.name}</p>
+                                        <PreviewPlayer previewUrl={track.preview_url} />
+                                    </div>
+                                </div>
+                            </div>
+                        </a>
+                    </li>
+                ))}
+            </ol>
+        </div>
+
+
             <h2>This Month's Top Artists:</h2>
             <ol>
                 {userData.topArtists.slice(0,10).map(artist => (
@@ -143,12 +170,16 @@ const Profile = () => {
                     </li>
                 ))}
             </ol>
+
+
             <h2>This Months's Top 10 Genres:</h2>
             <ol>
                 {topGenres.map((genre, index) => (
                     <li key={index}>{genre}</li>
                 ))}
             </ol>
+
+
         </div>
     );
 };
