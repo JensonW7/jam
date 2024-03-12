@@ -5,6 +5,7 @@ import { faPlus, faCheck } from '@fortawesome/free-solid-svg-icons'
 
 const SingleProfile = ({profile, friends, setFriends}) => {
     const {username, accessToken, dispatch} = useUserContext()
+
     const handleClick = (user) => {
         const unfollowUser = async (user) => {
             console.log('called unfollow user')
@@ -40,10 +41,19 @@ const SingleProfile = ({profile, friends, setFriends}) => {
     }
 
     return (
-        <div className="profile">
-            <button key={profile._id} onClick={() => {handleClick(profile.username)}}>{profile.username}
-                {friends && friends.includes(profile.username) && <span>unfollow <FontAwesomeIcon icon={faCheck} /></span>}
-                {friends && !friends.includes(profile.username) && <span>follow <FontAwesomeIcon icon={faPlus} /></span>}
+        <div className="profile" key={profile._id}>
+            <p>{profile.username}</p>
+            <button onClick={() => {handleClick(profile.username)}}>
+                {friends && friends.includes(profile.username) && 
+                <div className="button">
+                    <p>Unfollow</p>
+                    <FontAwesomeIcon icon={faCheck} />
+                </div>}
+                {friends && !friends.includes(profile.username) && 
+                <div className="button">
+                    <p>Follow</p>
+                    <FontAwesomeIcon icon={faPlus} />
+                </div>}
             </button>
         </div>
     )
