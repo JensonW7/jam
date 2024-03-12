@@ -9,7 +9,8 @@ import addLike from '../hooks/addLike'
 import removeLike from '../hooks/removeLike'
 
 const FriendBox = ({ collection }) => {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const [liked, setLiked] = useState(false)
 
   return (
     <>
