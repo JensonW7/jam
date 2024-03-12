@@ -67,36 +67,47 @@ const updateCurrentSongCollection = async (req, res) => {
   res.status(200).json(current_song);
 };
 
-// update likes
-const updateLikes = async (req, res) => {
-  const { username, songId } = req.body;
+// add like
+const addLike = async (req, res) => {
+  const { username } = req.params
 
   try {
-    // get the user's current songs collection
-    const userCurrentSongs = await currentSongCollection.findOne({ user: username });
+    const songCollection = await currentSongCollection.findOne({user: username})
+    let songs = songCollection.songs
+    songs[songs.length - 1].likes++
 
-    // error handling
-    if (!userCurrentSongs) {
-      return res.status(404).json({ message: "User's current songs collection not found." });
+    let tempSongCollection = songCollection
+    tempSongCollection.songs = songs
+
+    const updated = await currentSongCollection.findOneAndReplace({user: username}, tempSongCollection)
+
+    res.status(200).json(updated)
+  } catch (error) {
+    res.status(400).json({error: error})
+  }
+}
+
+// remove like
+const removeLike = async(req, res) => {
+  const { username } = req.params
+
+  try {
+    const songCollection = await currentSongCollection.findOne({user: username})
+    let songs = songCollection.songs
+    if (songs[songs.length - 1].likes > 0) {
+      songs[songs.length - 1].likes--
     }
 
-    // find the last song in the user's songs array and increment likes
-    const lastSongIndex = userCurrentSongs.songs.length - 1;
-    userCurrentSongs.songs[lastSongIndex].likes++;
-    
-    // update the database with the modified songs array
-    const updatedUserSongs = await currentSongCollection.findOneAndUpdate(
-      { user: username },
-      { $set: { songs: userCurrentSongs.songs } },
-    );
+    let tempSongCollection = songCollection
+    tempSongCollection.songs = songs
 
-    res.status(200).json(updatedUserSongs);
+    const updated = await currentSongCollection.findOneAndReplace({user: username}, tempSongCollection)
+
+    res.status(200).json(updated)
   } catch (error) {
-    console.error('Error updating likes:', error);
-    res.status(500).json({ message: 'Internal server error' });
+    res.status(400).json({error: error})
   }
-};
-
+}
 
 module.exports = {
   getCurrentSongCollections,
@@ -104,5 +115,6 @@ module.exports = {
   createCurrentSongCollection,
   deleteCurrentSongCollection,
   updateCurrentSongCollection,
-  updateLikes,
+  addLike,
+  removeLike
 };
