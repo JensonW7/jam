@@ -1,10 +1,10 @@
 // setup
 import { useContext, useEffect, useState } from "react";
 import "../index.css";
-import "./Home.css";
+import "../styles/home.css";
 
 // components
-import FriendBox from "../Components/HomeSquares/FriendBox";
+import FriendBox from "../components/FriendBox";
 
 import useAuth from "../hooks/useAuth";
 import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";

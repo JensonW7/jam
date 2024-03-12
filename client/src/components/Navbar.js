@@ -4,7 +4,7 @@ import { faJar } from '@fortawesome/free-solid-svg-icons';
 import { faArrowsRotate } from '@fortawesome/free-solid-svg-icons';
 
 
-import './styles/navbar.css'
+import '../styles/navbar.css'
 const Navbar = () => {
     return (
         <header>

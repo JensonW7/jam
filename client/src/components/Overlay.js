@@ -1,4 +1,4 @@
-import "./Overlay.css";
+import "../styles/overlay.css";
 
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";

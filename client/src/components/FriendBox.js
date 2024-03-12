@@ -1,9 +1,9 @@
-import "./FriendBox.css";
+import "../styles/friendBox.css";
 
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
-import Overlay from "../Overlay/Overlay";
+import Overlay from "./Overlay";
 import { useState } from "react";
 
 const FriendBox = ({ collection }) => {
