@@ -2,8 +2,8 @@
   background-color: #1b1c24;
   border-radius: 10px;
   border-color: transparent;
-  height: 360px;
-  width: 260px;
+  height: 370px;
+  width: 270px;
   padding: 10px;
   margin: 30px;
   position: relative;
@@ -30,7 +30,7 @@
   height: 225px;
   width: 225px;
   border-radius: 5px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
 }
 
 .friend-box p {
@@ -38,8 +38,8 @@
   font-size: 0.9em;
   color: #ffffff;
   text-align: left;
-  padding-top: 3px;
-  padding-left: 4px;
+  padding-top: 5px;
+  padding-left: 2px;
 }
 
 .friend-box p strong {
