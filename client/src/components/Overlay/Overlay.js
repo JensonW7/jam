@@ -25,7 +25,16 @@ export function Overlay({
             </div>
             {children}
             <div className="overlay_content">
+              <div className="user">
+              <p>
+              <div className="username">
               <h1>{username}</h1>
+              </div>
+              <div className="islisteningto">
+                   is listening to 
+                </div>
+              </p>
+              </div>
               <div className="songs">
                 {songCollection.map((song) => (
                   <div className="song-info">
