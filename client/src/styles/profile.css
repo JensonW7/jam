@@ -1,0 +1,226 @@
+/* Body styles */
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #13131A;
+    color: #EEEEEE;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container for the profile content */
+.profile-container {
+    width: 100%; /* Adjust to fill the entire width of the screen */
+    display: flex; /* Use flexbox for centering */
+    justify-content: center; /* Center the content horizontally */
+}
+
+.profile-heading {
+    text-align: left;
+}
+
+li {
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #EEEEEE;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Track container styles */
+.track-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.track-details {
+    flex: 1;
+    margin-left: 20px;
+}
+
+.track-details h3 {
+    margin: 0;
+}
+
+/* Individual track item */
+.track-item {
+    flex: 1 1 calc(50% - 10px);
+    margin-bottom: 20px; /* Adjust the margin between track items */
+    margin-right: 60px; /* Adjust the margin between track items */
+    margin-left: 90px;
+}
+
+/* Track item content */
+.track-item-content {
+    background-color: #1B1C24; /* Background color */
+    border-radius: 10px; /* Border radius */
+    padding: 10px; /* Padding */
+    display: flex;
+    align-items: center;
+    position: relative; /* Make position relative */
+}
+
+/* Number in the list */
+.track-item-content::before {
+    content: counter(list-item); /* Display the number */
+    position: absolute; /* Position absolute */
+    top: 7px; /* Position from top */
+    left: 7px; /* Position from left */
+    padding: 5px; /* Padding */
+    border-radius: 50%; /* Circle border radius */
+    background-color: #EEEEEE; /* Circle background color */
+    color: #1B1C24; /* Text color */
+    font-weight: bold; /* Bold font */
+    width: 15px; /* Width of the circle */
+    height: 15px; /* Height of the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure number is above content */
+}
+
+/* Remove default list numbering */
+ol {
+    list-style-type: none;
+    padding: 0;
+    columns: 2; /* Split into two columns */
+    column-gap: 20px; /* Add some gap between columns */
+    max-width: calc(100% - 40px); /* Adjust the width to fill the screen minus the padding */
+    margin: 0; /* Remove default margin */
+}
+
+/* Image styles */
+.track-item-content img {
+    width: 100px; /* Set the width */
+    height: 100px; /* Set the height */
+    border-radius: 0%; /* Make the image circular */
+    margin-right: 20px;
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+}
+
+/* Track details */
+.track-details {
+    flex: 1;
+}
+
+/* Audio player styles */
+.preview-audio-player {
+    margin-top: 10px;
+}
+
+.preview-audio-player audio::-webkit-media-controls-panel {
+    background-color: rgba(49, 50, 58, 0.8); /* Adjust the background color */
+    color: #EEEEEE; /* Adjust the color of the controls */
+}
+
+.preview-audio-player audio::-webkit-media-controls-play-button {
+    color: #EEEEEE; /* Adjust the color of the play button */
+}
+
+.preview-audio-player audio::-webkit-media-controls-volume-slider {
+    background-color: rgba(49, 50, 58, 0.8); /* Adjust the background color of the volume slider */
+}
+
+.preview-audio-player audio::-webkit-media-controls-current-time-display,
+.preview-audio-player audio::-webkit-media-controls-time-remaining-display {
+    color: #EEEEEE; 
+    text-shadow: none;
+    outline: none;
+}
+
+
+
+
+
+
+.artist-item {
+    width: calc(50% - 10px); 
+    margin-bottom: 20px;
+    margin-right: 180px; /* Adjust the margin between track items */
+    margin-left: 180px
+}
+
+/* Artist item content */
+.artist-item-content {
+    background-color: #1B1C24; /* Background color */
+    border-radius: 10px; /* Border radius */
+    padding: 10px; /* Padding */
+    display: flex;
+    flex-direction: column; /* Arrange items in a column */
+    align-items: center; /* Center items horizontally */
+    position: relative; /* Make position relative */
+    max-width: 300px; /* Adjust the maximum width */
+}
+
+/* Number in the list */
+.artist-item-content::before {
+    content: counter(list-item); /* Display the number */
+    position: absolute; /* Position absolute */
+    top: 7px; /* Adjust top position */
+    left: 7px; /* Adjust left position */
+    padding: 5px; /* Padding */
+    border-radius: 50%; /* Circle border radius */
+    background-color: #EEEEEE; /* Circle background color */
+    color: #1B1C24; /* Text color */
+    font-weight: bold; /* Bold font */
+    width: 15px; /* Width of the circle */
+    height: 15px; /* Height of the circle */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1; /* Ensure number is above content */
+}
+
+/* Remove default list numbering */
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+/* Image styles */
+.artist-item-content img {
+    width: 100px; /* Set the width */
+    height: 100px; /* Set the height */
+    border-radius: 20%; /* Make the image circular */
+    object-fit: cover; /* Maintain aspect ratio and cover container */
+    margin-bottom: 10px; /* Add margin to bottom */
+}
+
+/* Artist details */
+.artist-details {
+    text-align: center; /* Center the text */
+    width: 100%; /* Set width to 100% */
+}
+
+
+/* Genres styles */
+h2:last-of-type {
+    margin-top: 20px;
+}
+
+ol:last-of-type {
+    margin-bottom: 20px;
+}
+
+
+
+
+
+
+/* Adjustments for the ordered list */
+ol {
+    list-style-type: none;
+    padding: 0;
+}
+
+ol li {
+    margin-bottom: 10px; /* Adjust as needed */
+}
+
+
