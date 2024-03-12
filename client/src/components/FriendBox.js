@@ -9,8 +9,9 @@ import addLike from "../hooks/addLike";
 import removeLike from "../hooks/removeLike";
 
 const FriendBox = ({ collection }) => {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
-  const [liked, setLiked] = useState(false);
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
+  const [liked, setLiked] = useState(false)
+  const [likeCount, setLikeCount] = useState(collection.songs[collection.songs.length - 1].likes)
 
   return (
     <>
@@ -39,9 +40,23 @@ const FriendBox = ({ collection }) => {
           </p>
         </div>
         <div className="button">
-          <button className="reaction">
+          {!liked && <button className="reaction" onClick={() => {
+            setLiked(!liked)
+            setLikeCount(likeCount + 1)
+            addLike(collection.user)
+          }}>
             <p>like</p>
-          </button>
+            <p>{likeCount}</p>
+          </button>}
+
+          {liked && <button className="reaction" onClick={() => {
+            setLiked(!liked)
+            setLikeCount(likeCount - 1)
+            removeLike(collection.user)
+          }}>
+            <p>unlike</p>
+            <p>{likeCount}</p>
+          </button>}
         </div>
       </div>
       <div className="overlay">
