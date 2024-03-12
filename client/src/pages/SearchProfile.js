@@ -27,7 +27,7 @@ const SearchProfile = () => {
 
 
     return (
-        <div>
+        <div className='searchPage'>
             <SearchForm setSearchResult={setSearchResult}/>
             <SearchProfileResult searchResult={searchResult} />
         </div>

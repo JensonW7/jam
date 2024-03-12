@@ -1,4 +1,7 @@
 import { useState } from 'react'
+import '../styles/search.css'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons'
 
 const SearchForm = ({setSearchResult}) => {
 
@@ -26,14 +29,14 @@ const SearchForm = ({setSearchResult}) => {
     function renderSearchBox({searchTerm}) {
         return (
             <form name="form" onSubmit={handleSubmit}>
-                <label> Search Profile:
+                <FontAwesomeIcon icon={faMagnifyingGlass} />
                 <input 
                     type="text" 
                     value={searchTerm}
+                    placeholder='Search Profile'
                     // onChange={(e) => setSearchTerm(e.target.value)}
                     onChange={(e) => handleChange(e.target.value)}
                 />
-                </label>
             </form>
         )
     }
