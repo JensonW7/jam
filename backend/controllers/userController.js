@@ -95,11 +95,38 @@ const addFollowing = async (req, res) => {
     res.status(200).json(user)
 }
 
+const removeFollowing = async (req, res) => {
+    console.log('called')
+    const { id } = req.params
+    const user = await userCollection.findOne({username: id})
+
+    if (user && id != req.body.user) {
+        let newFriends = []
+        let tempFriends = user.friends
+        for (let i = 0; i < tempFriends.length; i++) {
+            if (tempFriends[i].username != req.body.user) {
+                newFriends.push(tempFriends[i])
+            }
+        }
+
+        console.log(newFriends)
+
+        const updated = await userCollection.findOneAndUpdate({username: id}, {$set: {friends: newFriends}})
+
+        if (!updated) {
+            res.status(404).json({error: "couldn't unfollow user"})
+        }
+    }
+
+    res.status(200).json(user)
+}
+
 module.exports = {
     getUsers,
     getUser,
     createUser,
     deleteUser,
     updateUser,
-    addFollowing
+    addFollowing,
+    removeFollowing
 }

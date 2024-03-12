@@ -1,0 +1,134 @@
+.overlay__background {
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  cursor: pointer;
+  z-index: 9;
+}
+
+.overlay_box {
+  background-color: black;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: 30px;
+  margin: auto;
+  z-index: 10;
+  padding: 50px;
+  width: 70%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+}
+
+.overlay__controls {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.overlay__close:after {
+  display: inline-block;
+  content: "\00d7";
+}
+
+.overlay__close {
+  border: none;
+  background-color: transparent;
+  font-size: 36px;
+  cursor: pointer;
+}
+
+.overlay_content {
+  height: 100%;
+  width: 100%;
+  max-height: 60vh;
+  overflow-y: auto;
+}
+
+.user {
+  position: sticky;
+  top: 0;
+  left: 0;
+  width: 50%;
+  height: 100%;
+  float: left;
+  color: white;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.9vw;
+}
+
+.username {
+  inline-size: 24vw;
+  overflow-wrap: break-word;
+}
+
+.islisteningto {
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.1vw;
+  float: left;
+  margin-top: -20px;
+}
+
+.songs {
+  margin-top: 60px;
+  background-color: black;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 30px;
+  margin-left: 20%;
+}
+
+.song-info {
+  background-color: #1b1c24;
+  border-radius: 5px;
+  width: 140px;
+  height: 200px;
+  padding: 10px;
+}
+
+.song-info img {
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  justify-content: center;
+  display: block;
+  height: 70%;
+  width: 100%;
+  margin-left: 0.5px;
+  margin-right: 2px;
+  padding-bottom: 6px;
+}
+
+.song-info p {
+  color: white;
+  font-size: 10px;
+  text-align: left;
+  line-height: 0.2;
+  font-family: "Poppins", sans-serif;
+  padding: 2px;
+}
+
+.song-info p strong {
+  font-weight: bold;
+  font-size: 1.2em; /* Adjust the size as needed */
+  margin-bottom: 5px; /* Add or reduce margin-bottom as needed */
+}
+
+/* Media query for smaller screens, adjust as needed */
+@media (max-width: 768px) {
+  .songs {
+    max-height: none; /* Remove the max-height for smaller screens */
+  }
+}

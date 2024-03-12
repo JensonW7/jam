@@ -1,0 +1,58 @@
+.friend-box {
+  background-color: #1b1c24;
+  border-radius: 10px;
+  border-color: transparent;
+  height: 370px;
+  width: 270px;
+  padding: 10px;
+  margin: 30px;
+  position: relative;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: all 0.3s;
+}
+
+.friend-box:hover {
+  transform: scale(1.04);
+  cursor: pointer;
+}
+
+.friend-box h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: #ffffff;
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.friend-box img {
+  height: 225px;
+  width: 225px;
+  border-radius: 5px;
+  padding-bottom: 10px;
+}
+
+.friend-box p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #ffffff;
+  text-align: left;
+  padding-top: 5px;
+  padding-left: 2px;
+}
+
+.friend-box p strong {
+  font-size: 1.1em;
+}
+
+.friend-box span {
+  top: 2px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}

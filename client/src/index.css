@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f1f1f1;
+  background: #13131A;
+  color: #EEEEEE;
 }
 
 code {
@@ -17,11 +20,6 @@ code {
 
 span {
   font-weight: bold;
-}
-
-/* need to center the FriendSquares */
-.container {
-  margin: auto;
 }
 
 .friendCollection {
@@ -48,7 +46,8 @@ span {
 }
 
 header {
-  background: #fff;
+  color: #EEEEEE;
+  text-decoration: none;
 }
 
 header .container {
@@ -71,20 +70,3 @@ header a {
   margin: 0 auto;
 }
 
-/* to resize the squares */
-@media (max-width: 969px) {
-  section {
-    padding: 20px 20px;
-  }
-  .friend-box {
-    flex: 0 0 calc(50% - 20px);
-    max-width: calc(50% - 20px);
-  }
-}
-
-@media (max-width: 969px) {
-  .friend-box {
-    flex: 0 0 100%;
-    max-width: 100%;
-  }
-}

@@ -1,9 +1,10 @@
 // setup
 import { useContext, useEffect, useState } from "react";
 import "../index.css";
+import "../styles/home.css";
 
 // components
-import FriendBox from "../components/HomeSquares/FriendBox";
+import FriendBox from "../components/FriendBox";
 
 import useAuth from "../hooks/useAuth";
 import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";
@@ -59,22 +60,24 @@ const Home = ({ code, state }) => {
   }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
 
   useEffect(() => {
-    const fetchMyCollection = async () => {
+    const fetchMyBox = async () => {
       const response = await fetch("/api/current_songs/" + username);
       const json = await response.json();
+
       if (response.ok) {
         setmyBox(json);
       }
     };
-    fetchMyCollection();
-  }, [username]);
-  console.log(myBox);
+
+    fetchMyBox();
+  }, [friendsArray]);
 
   return (
     <div className="home">
       <div className="container">
-        <div className="friends">
-          <h1>Friend Activity</h1>
+        <h1>Listening Activity</h1>
+        <div className="friends-grid">
+          {myBox && <FriendBox collection={myBox} />}
           {friendBoxes &&
             friendBoxes.map((collection) => (
               <FriendBox key={collection._id} collection={collection} />
