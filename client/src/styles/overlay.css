@@ -10,7 +10,7 @@
 }
 
 .overlay_box {
-  background-color: black;
+  background-color: #36454f;
   position: fixed;
   top: 0;
   right: 0;
@@ -60,7 +60,7 @@
   height: 100%;
   float: left;
   color: white;
-  background: black;
+  background: #36454f ;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@
 
 .songs {
   margin-top: 60px;
-  background-color: black;
+  background-color: #36454f  ;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
