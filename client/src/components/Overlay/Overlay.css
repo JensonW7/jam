@@ -22,6 +22,8 @@
   padding: 50px;
   width: 70%;
   height: 70%;
+  display: flex;
+  flex-direction: column;
 }
 
 .overlay__controls {
@@ -50,6 +52,9 @@
 }
 
 .user {
+  position: sticky;
+  top: 0;
+  left: 0;
   width: 50%;
   height: 100%;
   float: left;
@@ -61,10 +66,12 @@
   font-family: "Poppins", sans-serif;
   font-size: 1.9vw;
 }
+
 .username {
   inline-size: 24vw;
   overflow-wrap: break-word;
 }
+
 .islisteningto {
   color: white;
   display: flex;
@@ -76,18 +83,19 @@
 }
 
 .songs {
+  margin-top: 60px;
   background-color: black;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
-  margin-left: 50%;
+  margin-left: 20%;
 }
 
 .song-info {
   background-color: #1b1c24;
   border-radius: 5px;
   width: 140px;
-  height: 180px;
+  height: 200px;
   padding: 10px;
 }
 
@@ -96,11 +104,11 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   justify-content: center;
   display: block;
-  height: 75%;
+  height: 70%;
   width: 100%;
   margin-left: 0.5px;
   margin-right: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 6px;
 }
 
 .song-info p {
@@ -109,7 +117,7 @@
   text-align: left;
   line-height: 0.2;
   font-family: "Poppins", sans-serif;
-  padding: 1px;
+  padding: 2px;
 }
 
 .song-info p strong {
@@ -120,7 +128,7 @@
 
 /* Media query for smaller screens, adjust as needed */
 @media (max-width: 768px) {
-  .overlay_content {
+  .songs {
     max-height: none; /* Remove the max-height for smaller screens */
   }
 }

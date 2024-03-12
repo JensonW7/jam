@@ -26,14 +26,12 @@ export function Overlay({
             {children}
             <div className="overlay_content">
               <div className="user">
-              <p>
-              <div className="username">
-              <h1>{username}</h1>
-              </div>
-              <div className="islisteningto">
-                   is listening to 
-                </div>
-              </p>
+                <p>
+                  <div className="username">
+                    <h1>{username}</h1>
+                  </div>
+                  <div className="islisteningto">is listening to</div>
+                </p>
               </div>
               <div className="songs">
                 {songCollection.map((song) => (
@@ -44,7 +42,10 @@ export function Overlay({
                       width="75"
                       height="75"
                     ></img>
-                    <p> <strong>{song.title}</strong></p>
+                    <p>
+                      {" "}
+                      <strong>{song.title}</strong>
+                    </p>
                     <p> {song.artist}</p>
                     <p>
                       {formatDistanceToNow(new Date(song.timestamp), {
