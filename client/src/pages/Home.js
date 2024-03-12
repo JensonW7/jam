@@ -16,7 +16,7 @@ const Home = ({ code, state }) => {
   const { username, accessToken, dispatch } = useUserContext();
   const [friendBoxes, setFriendBoxes] = useState(null);
   const [friendsArray, setFriendsArray] = useState([]);
-  //const [myBox, setmyBox] = useState(null);
+  const [myBox, setmyBox] = useState(null);
 
   useAuth(code, state);
   useUpdateCurrentSong();
@@ -59,10 +59,25 @@ const Home = ({ code, state }) => {
     }
   }, [friendsArray]); // so UseEffect can be triggered whenever friendsArray changes
 
+  useEffect(() => {
+    const fetchMyBox = async () => {
+      const response = await fetch("/api/current_songs/" + username);
+      const json = await response.json();
+
+      if (response.ok) {
+        setmyBox(json);
+      }
+    };
+
+    fetchMyBox();
+  }, [friendsArray]);
+
   return (
     <div className="home">
       <div className="container">
+        <h1>Listening Activity</h1>
         <div className="friends-grid">
+          {myBox && <FriendBox collection={myBox} />}
           {friendBoxes &&
             friendBoxes.map((collection) => (
               <FriendBox key={collection._id} collection={collection} />
