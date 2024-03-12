@@ -35,6 +35,7 @@
 .overlay__close:after {
   display: inline-block;
   content: "\00d7";
+  color: rgb(221, 221, 221);
 }
 
 .overlay__close {

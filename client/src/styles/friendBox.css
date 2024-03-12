@@ -17,13 +17,12 @@
 
 .friend-box:hover {
   transform: scale(1.04);
-  cursor: pointer;
 }
 
 .front-song {
   text-align: center;
   width: 225px;
-  height: 355px;
+  height: 370px;
   overflow: hidden;
 }
 
@@ -40,21 +39,21 @@
   width: 225px;
   border: none;
   border-radius: 5px;
-  padding-bottom: 10px;
-  margin: 0;
+  margin: 0 0 8px 0;
   cursor: pointer;
   overflow: hidden;
   position: relative;
 }
 
-.friend-box button.overlay-button img {
+.front-song button.overlay-button img {
   width: 225px;
   height: 225px;
   border-radius: 5px;
   object-fit: cover;
-  position: absolute; /* Position the image absolutely within the button */
+  position: absolute; 
   top: 0;
   left: 0;
+
 }
 
 .front-song p {
@@ -62,8 +61,8 @@
   font-size: 0.9em;
   color: #ffffff;
   text-align: left;
-  padding-top: 5px;
   padding-left: 2px;
+  padding-top: 5px;
 }
 
 .friend-box p strong {
