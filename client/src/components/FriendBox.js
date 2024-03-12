@@ -37,9 +37,9 @@ const FriendBox = ({ collection }) => {
             )}
           </p>
         </div>
-        <div className="reaction">
+        <button className="reaction">
           
-        </div>
+        </button>
       </div>
       <div className="overlay">
         <Overlay
