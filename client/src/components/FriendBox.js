@@ -5,21 +5,19 @@ import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
 import Overlay from "./Overlay";
 import { useState } from "react";
-import addLike from '../hooks/addLike'
-import removeLike from '../hooks/removeLike'
+import addLike from "../hooks/addLike";
+import removeLike from "../hooks/removeLike";
 
 const FriendBox = ({ collection }) => {
-  const [isOverlayOpen, setIsOverlayOpen] = useState(false)
-  const [liked, setLiked] = useState(false)
+  const [isOverlayOpen, setIsOverlayOpen] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   return (
     <>
       <div className="friend-box">
         <div className="front-song">
           <h4>{collection.user}</h4>
-          <button
-            className="overlay-button"
-          >
+          <button className="overlay-button">
             <img
               src={collection.songs[collection.songs.length - 1].image.url} //Album Cover
               alt="album cover"
@@ -40,9 +38,11 @@ const FriendBox = ({ collection }) => {
             )}
           </p>
         </div>
-        <button className="reaction">
-          
-        </button>
+        <div className="button">
+          <button className="reaction">
+            <p>like</p>
+          </button>
+        </div>
       </div>
       <div className="overlay">
         <Overlay
