@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 body {
   margin: 0;
   padding: 0;
@@ -7,7 +9,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: #f1f1f1;
+  background: #13131A;
+  color: #EEEEEE;
 }
 
 code {
@@ -43,7 +46,8 @@ span {
 }
 
 header {
-  background: #fff;
+  color: #EEEEEE;
+  text-decoration: none;
 }
 
 header .container {

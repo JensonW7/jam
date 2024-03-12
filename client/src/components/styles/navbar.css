@@ -7,9 +7,9 @@
 
 .navbar {
     font-family: 'Poppins', sans-serif;
-    background-color: black
+    background-color: #13131A
 }
 
 .navbar h1, .navbar h2 {
-    color: white;
+    color: #EEEEEE;
 }

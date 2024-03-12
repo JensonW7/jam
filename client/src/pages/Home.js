@@ -4,7 +4,7 @@ import "../index.css";
 import "./Home.css";
 
 // components
-import FriendBox from "../components/HomeSquares/FriendBox";
+import FriendBox from "../Components/HomeSquares/FriendBox";
 
 import useAuth from "../hooks/useAuth";
 import { useUpdateCurrentSong } from "../hooks/useUpdateCurrentSong";
