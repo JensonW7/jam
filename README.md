@@ -11,6 +11,6 @@ Full-stack web app for Spotify users to view listening activity of others and th
 3. In seperate terminal sessions, run **npm run dev** in the backend folder and **npm start** in the client folder.
 4. Navigate to http://localhost:3000/ in your browser
 
-**NOTE TO THE TAs:** if you would like to personally run our app, please send your email [here](mailto:kay1inchung@g.ucla.edu?subject=[jam]%20Spotify%20Developers%20Access).
+**NOTE TO THE TAs:** if you would like to personally run our app, please send your email [here](mailto:kay1inchung@g.ucla.edu?subject=[jam]%20Spotify%20Developers%20Access) so we can grant you access to our Spotify Developers app. 
 
 
