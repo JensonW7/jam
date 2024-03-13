@@ -3,6 +3,10 @@ import "../styles/overlay.css";
 //date fns
 import formatDistanceToNow from "date-fns/formatDistanceToNow";
 
+//heart
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart as heart } from "@fortawesome/free-solid-svg-icons";
+
 export function Overlay({
   isOpen,
   onClose,
@@ -43,17 +47,23 @@ export function Overlay({
                       height="75"
                     ></img>
                     <div className="overflow">
-                    <p>
-                      {" "}
-                      <strong>{song.title}</strong>
-                    </p>
+                      <p>
+                        {" "}
+                        <strong>{song.title}</strong>
+                      </p>
                     </div>
                     <p> {song.artist}</p>
-                    <p>
-                      {formatDistanceToNow(new Date(song.timestamp), {
-                        addSuffix: true,
-                      })}
-                    </p>
+                    <div className="horizontally">
+                      <p>
+                        {formatDistanceToNow(new Date(song.timestamp), {
+                          addSuffix: true,
+                        })}
+                      </p>
+                      <div className="likes">
+                        <FontAwesomeIcon icon={heart} />
+                        <p>{song.likes}</p>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>

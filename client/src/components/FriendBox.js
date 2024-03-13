@@ -19,7 +19,7 @@ const FriendBox = ({ collection }) => {
     collection.songs[collection.songs.length - 1].likes
   );
 
-  return (
+  return ( 
     <>
       <div className="friend-box">
         <div className="front-song">

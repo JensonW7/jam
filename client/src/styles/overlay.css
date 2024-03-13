@@ -19,7 +19,7 @@
   border-radius: 30px;
   margin: auto;
   z-index: 10;
-  padding: 50px;
+  padding: 40px;
   width: 70%;
   height: 70%;
   display: flex;
@@ -60,7 +60,7 @@
   height: 100%;
   float: left;
   color: white;
-  background: #36454f ;
+  background: #36454f;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -85,7 +85,7 @@
 
 .songs {
   margin-top: 60px;
-  background-color: #36454f  ;
+  background-color: #36454f;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   gap: 30px;
@@ -109,6 +109,7 @@
   width: 100%;
   margin-left: 0.5px;
   margin-right: 2px;
+  margin-bottom: 10px;
   padding-bottom: 2px;
 }
 
@@ -119,6 +120,7 @@
   line-height: 0px;
   font-family: "Poppins", sans-serif;
   padding: 2px;
+  margin: 6px 2px 6px 0;
 }
 
 .overflow {
@@ -130,7 +132,25 @@
 .song-info p strong {
   font-weight: bold;
   font-size: 1.2em; /* Adjust the size as needed */
-  margin-bottom: 5px; /* Add or reduce margin-bottom as needed */
+}
+
+.horizontally {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likes {
+  display: flex;
+  justify-content: space-between;
+}
+
+.likes p {
+  font-size: 13px;
+  margin-left: 3px;
+}
+
+.likes .svg-inline--fa {
+  font-size: 12px;
 }
 
 /* Media query for smaller screens, adjust as needed */
