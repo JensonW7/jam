@@ -1,10 +1,12 @@
 # jam
 ---
-Full-stack web app for Spotify users to view live listening activity of their friends as well as their own weekly listening stats
+Full-stack web app for Spotify users to view listening activity of others and their own weekly listening stats
 
 ## Getting Started
-1. Clone this respository on to your local machine
-2. Navigate into the client folder wherever you cloned the repository
-3. Run npm install to install dependencies for the project
-4. Run npm start to run a local test server
-5. Navigate to http://localhost:3000/ in your browser
+1. Clone this repository on to your local machine
+1a. If you are recreating this, using the Spotify API requires making an app on their platform at https://developer.spotify.com/. Use of an app in development mode, like ours, is invite only. After creating an app on Spotify's platform, you can copy the client id and client secret into the relevant fields in the .env folder in the backend.
+1b. For the database, one can be created with MongoDB Atlas. Using the connect interface, place the connection string into MONGO_URI in the .env file.
+1c. Side note: in production, the .env folder holds sensitive information and should be included in the .gitignore file.
+2. Run npm i in both the client and backend folders to install dependencies. 
+3. In seperate terminal sessions, run npm run dev in the backend folder and npm start in the client folder.
+4. Navigate to http://localhost:3000/ in your browser
