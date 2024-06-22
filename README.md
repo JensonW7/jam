@@ -1,6 +1,6 @@
 # jam
 ---
-Full-stack web app for Spotify users to view listening activity of others and their own weekly listening stats
+Full-stack web app for Spotify users to follow their friends to view and interact with their live listening activity. Provides weekly listening stats for their own account as well.
 
 ## Getting Started
 1. Clone this repository on to your local machine <br />
