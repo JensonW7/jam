@@ -42,7 +42,7 @@ const Profile = () => {
             topTracks: topTracksResponse.data.items,
         };
 
-        // for calcualting top genre with both top artists and top tracks
+        // for calculating top genre with both top artists and top tracks
         // 1) use artist as parameter for flatMap array and accesses their respective genres array
         // 2) use track as a parameter for flatMap array and accesses their respective genres array
         // filter Boolean rids of undefined (or null) values that are set (this error was found)
